@@ -111,7 +111,7 @@ AHBRSTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t AHBRSTR;    \/*!< RCC AHB perip
 AIRCR	cmsis_core/core_cm0.h	/^  __IO uint32_t AIRCR;                        \/*!< Offset: 0x0C  Application Interrupt \/ Reset Control Register        *\/$/;"	m	struct:__anon2
 ALRMAR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ALRMAR;     \/*!< RTC alarm A register,                                     Address offset: 0x1C *\/$/;"	m	struct:__anon31
 ALRMASSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ALRMASSR;   \/*!< RTC alarm A sub second register,                          Address offset: 0x44 *\/$/;"	m	struct:__anon31
-ANTENAA9	src/main.c	27;"	d	file:
+ANTENAB3	src/main.c	32;"	d	file:
 APB1ENR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t APB1ENR;    \/*!< RCC APB1 peripheral clock enable register,                   Address offset: 0x1C *\/$/;"	m	struct:__anon30
 APB1FZ	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t APB1FZ;       \/*!< Debug MCU APB1 freeze register,              Address offset: 0x08 *\/$/;"	m	struct:__anon19
 APB1RSTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t APB1RSTR;   \/*!< RCC APB1 peripheral reset register,                          Address offset: 0x10 *\/$/;"	m	struct:__anon30
@@ -138,10 +138,10 @@ BRR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t BRR;    \/*!< USART Baud rate regis
 BS	src/noritake_lcd.h	44;"	d
 BSRR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t BSRR;         \/*!< GPIO port bit set\/reset registerBSRR,                     Address offset: 0x18 *\/$/;"	m	struct:__anon25
 BTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t              BTR;                 \/*!< CAN bit timing register,             Address offset: 0x1C          *\/$/;"	m	struct:__anon13
-BUFFRX_DIM	src/stm32f0x_uart.c	23;"	d	file:
-BUFFRX_TIMEOUT	src/stm32f0x_uart.c	29;"	d	file:
-BUFFTX_DIM	src/stm32f0x_uart.c	24;"	d	file:
-BUFFTX_TIMEOUT	src/stm32f0x_uart.c	30;"	d	file:
+BUFFRX_DIM	src/stm32f0x_uart.c	24;"	d	file:
+BUFFRX_TIMEOUT	src/stm32f0x_uart.c	30;"	d	file:
+BUFFTX_DIM	src/stm32f0x_uart.c	25;"	d	file:
+BUFFTX_TIMEOUT	src/stm32f0x_uart.c	31;"	d	file:
 CAL	cmsis_boot/stm32f0xx.h	745;"	d
 CALIB	cmsis_core/core_cm0.h	/^  __I  uint32_t CALIB;                        \/*!< Offset: 0x0C  SysTick Calibration Register        *\/$/;"	m	struct:__anon3
 CALR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CALR;       \/*!< RTC calibration register,                                 Address offset: 0x3C *\/$/;"	m	struct:__anon31
@@ -1332,6 +1332,8 @@ CFGR3	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CFGR3;      \/*!< RCC clock confi
 CFR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CFR;  \/*!< WWDG Configuration register, Address offset: 0x04 *\/$/;"	m	struct:__anon36
 CHANNEL	src/comm.h	14;"	d
 CHSELR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CHSELR;       \/*!< ADC channel selection register,                             Address offset:0x28 *\/$/;"	m	struct:__anon8
+CH_IN_TEMP	src/hard.h	155;"	d
+CH_IN_TEMP	src/hard.h	86;"	d
 CIR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CIR;        \/*!< RCC clock interrupt register,                                Address offset: 0x08 *\/$/;"	m	struct:__anon30
 CLR	src/noritake_lcd.h	49;"	d
 CMAR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CMAR;         \/*!< DMA channel x memory address register                                          *\/$/;"	m	struct:__anon20
@@ -1380,7 +1382,7 @@ COMP_CSR_COMP2OUTSEL_2	cmsis_boot/stm32f0xx.h	2492;"	d
 COMP_CSR_COMP2POL	cmsis_boot/stm32f0xx.h	2493;"	d
 COMP_CSR_WNDWEN	cmsis_boot/stm32f0xx.h	2488;"	d
 COMP_TypeDef	cmsis_boot/stm32f0xx.h	/^} COMP_TypeDef;$/;"	t	typeref:struct:__anon15
-CONNECT	src/main.h	83;"	d
+CONNECT	src/hard.h	183;"	d
 CORELIBDIR	Makefile	/^CORELIBDIR = .\/cmsis_core$/;"	m
 CP	Makefile	/^CP   = $(TRGT)objcopy$/;"	m
 CPAR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CPAR;         \/*!< DMA channel x peripheral address register                                      *\/$/;"	m	struct:__anon20
@@ -1463,6 +1465,12 @@ CSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CSR;        \/*!< RCC clock control
 CSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CSR;     \/*!< COMP comparator control and status register, Address offset: 0x1C *\/$/;"	m	struct:__anon15
 CSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CSR;  \/*!< PWR power control\/status register, Address offset: 0x04 *\/$/;"	m	struct:__anon29
 CTRL	cmsis_core/core_cm0.h	/^  __IO uint32_t CTRL;                         \/*!< Offset: 0x00  SysTick Control and Status Register *\/$/;"	m	struct:__anon3
+CTRL_FAN	src/hard.h	104;"	d
+CTRL_FAN	src/hard.h	35;"	d
+CTRL_FAN_OFF	src/hard.h	106;"	d
+CTRL_FAN_OFF	src/hard.h	37;"	d
+CTRL_FAN_ON	src/hard.h	105;"	d
+CTRL_FAN_ON	src/hard.h	36;"	d
 CopyDataInit	cmsis_boot/startup/startup_stm32f0xx.s	/^CopyDataInit:$/;"	l
 CoreDebug	cmsis_core/core_cm0.h	368;"	d
 CoreDebug_BASE	cmsis_core/core_cm0.h	360;"	d
@@ -1706,6 +1714,8 @@ DMA_ISR_TEIF5	cmsis_boot/stm32f0xx.h	2716;"	d
 DMA_ISR_TEIF6	cmsis_boot/stm32f0xx.h	2720;"	d
 DMA_ISR_TEIF7	cmsis_boot/stm32f0xx.h	2724;"	d
 DMA_TypeDef	cmsis_boot/stm32f0xx.h	/^} DMA_TypeDef;$/;"	t	typeref:struct:__anon21
+DMX_INPUT	src/hard.h	137;"	d
+DMX_INPUT	src/hard.h	68;"	d
 DOR1	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t DOR1;     \/*!< DAC channel1 data output register,                       Address offset: 0x2C *\/$/;"	m	struct:__anon18
 DOR2	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t DOR2;     \/*!< DAC channel2 data output register,                       Address offset: 0x30 *\/$/;"	m	struct:__anon18
 DR	cmsis_boot/stm32f0xx.h	/^   __IO uint32_t DR;          \/*!< ADC data register,                                          Address offset:0x40 *\/$/;"	m	struct:__anon8
@@ -1719,9 +1729,9 @@ EMR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t EMR;          \/*!<EXTI Event mask 
 ENABLE	cmsis_boot/stm32f0xx.h	/^typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;$/;"	e	enum:__anon6
 ENA_SERIAL	src/noritake_lcd.h	20;"	d
 ENA_SERIAL_LCD	src/noritake_lcd.h	17;"	d
-END_ERROR	src/main.h	/^	END_ERROR,$/;"	e	enum:end_states
-END_OK	src/main.h	/^	END_OK,$/;"	e	enum:end_states
-END_TIMEOUT	src/main.h	/^	END_TIMEOUT$/;"	e	enum:end_states
+END_ERROR	src/hard.h	/^	END_ERROR,$/;"	e	enum:end_states
+END_OK	src/hard.h	/^	END_OK,$/;"	e	enum:end_states
+END_TIMEOUT	src/hard.h	/^	END_TIMEOUT$/;"	e	enum:end_states
 ERROR	cmsis_boot/stm32f0xx.h	/^typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrorStatus;$/;"	e	enum:__anon7
 ERROR	src/comm.h	19;"	d
 ESC	src/noritake_lcd.h	50;"	d
@@ -2390,6 +2400,7 @@ GPIO_PUPDR_PUPDR9_1	cmsis_boot/stm32f0xx.h	3263;"	d
 GPIO_TypeDef	cmsis_boot/stm32f0xx.h	/^}GPIO_TypeDef;$/;"	t	typeref:struct:__anon25
 GTPR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t GTPR;   \/*!< USART Guard time and prescaler register,  Address offset: 0x10 *\/$/;"	m	struct:__anon35
 GetTemp	src/main.c	/^int GetTemp (unsigned short adc_temp)$/;"	f
+HARD_H_	src/hard.h	9;"	d
 HEX	Makefile	/^HEX  = $(CP) -O ihex$/;"	m
 HOM	src/noritake_lcd.h	47;"	d
 HSCROLL	src/noritake_lcd.h	55;"	d
@@ -2553,9 +2564,15 @@ LCD_Str	src/noritake_lcd.c	/^void LCD_Str(unsigned char * pstr)$/;"	f
 LCKR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t LCKR;         \/*!< GPIO port configuration lock register,                    Address offset: 0x1C *\/$/;"	m	struct:__anon25
 LDFLAGS	Makefile	/^LDFLAGS = $(MCFLAGS) -mthumb --specs=nano.specs -Wl,--gc-sections -nostartfiles -T$(LDSCRIPT) -Wl,-Map=$(FULL_PRJ).map,--cref,--no-warn-mismatch $(LIBDIR)$/;"	m
 LDSCRIPT	Makefile	/^LDSCRIPT = $(LINKER)\/stm32_flash.ld$/;"	m
+LED	src/hard.h	24;"	d
+LED	src/hard.h	93;"	d
 LED_COMM	src/noritake_lcd.h	29;"	d
 LED_COMM_OFF	src/noritake_lcd.h	31;"	d
 LED_COMM_ON	src/noritake_lcd.h	30;"	d
+LED_OFF	src/hard.h	26;"	d
+LED_OFF	src/hard.h	95;"	d
+LED_ON	src/hard.h	25;"	d
+LED_ON	src/hard.h	94;"	d
 LF	src/noritake_lcd.h	46;"	d
 LIBDIR	Makefile	/^LIBDIR  = $(patsubst %,-L%,$(DLIBDIR) $(ULIBDIR))$/;"	m
 LIBS	Makefile	/^LIBS    = $(DLIBS) $(ULIBS)$/;"	m
@@ -2606,6 +2623,12 @@ OB_WRP3_WRP3	cmsis_boot/stm32f0xx.h	3057;"	d
 OB_WRP3_nWRP3	cmsis_boot/stm32f0xx.h	3058;"	d
 OCDCMN	Makefile	/^OCDCMN = -c "program $(FULL_PRJ).bin verify reset exit"$/;"	m
 ODR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t ODR;          \/*!< GPIO port output data register,                           Address offset: 0x14 *\/$/;"	m	struct:__anon25
+OE	src/hard.h	149;"	d
+OE	src/hard.h	80;"	d
+OE_OFF	src/hard.h	150;"	d
+OE_OFF	src/hard.h	81;"	d
+OE_ON	src/hard.h	151;"	d
+OE_ON	src/hard.h	82;"	d
 OPT	Makefile	/^OPT = -O0$/;"	m
 OPTKEYR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t OPTKEYR;      \/*!<FLASH OPT key register,                        Address offset: 0x08 *\/$/;"	m	struct:__anon23
 OR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t OR;              \/*!< TIM option register,                         Address offset: 0x50 *\/$/;"	m	struct:__anon33
@@ -2656,6 +2679,30 @@ PWR_CSR_SBF	cmsis_boot/stm32f0xx.h	3594;"	d
 PWR_CSR_VREFINTRDY	cmsis_boot/stm32f0xx.h	3596;"	d
 PWR_CSR_VREFINTRDYF	cmsis_boot/stm32f0xx.h	3608;"	d
 PWR_CSR_WUF	cmsis_boot/stm32f0xx.h	3593;"	d
+PWR_DS1	src/hard.h	129;"	d
+PWR_DS1	src/hard.h	60;"	d
+PWR_DS1_OFF	src/hard.h	131;"	d
+PWR_DS1_OFF	src/hard.h	62;"	d
+PWR_DS1_ON	src/hard.h	130;"	d
+PWR_DS1_ON	src/hard.h	61;"	d
+PWR_DS2	src/hard.h	124;"	d
+PWR_DS2	src/hard.h	55;"	d
+PWR_DS2_OFF	src/hard.h	126;"	d
+PWR_DS2_OFF	src/hard.h	57;"	d
+PWR_DS2_ON	src/hard.h	125;"	d
+PWR_DS2_ON	src/hard.h	56;"	d
+PWR_DS3	src/hard.h	109;"	d
+PWR_DS3	src/hard.h	40;"	d
+PWR_DS3_OFF	src/hard.h	111;"	d
+PWR_DS3_OFF	src/hard.h	42;"	d
+PWR_DS3_ON	src/hard.h	110;"	d
+PWR_DS3_ON	src/hard.h	41;"	d
+PWR_DS4	src/hard.h	142;"	d
+PWR_DS4	src/hard.h	73;"	d
+PWR_DS4_OFF	src/hard.h	144;"	d
+PWR_DS4_OFF	src/hard.h	75;"	d
+PWR_DS4_ON	src/hard.h	143;"	d
+PWR_DS4_ON	src/hard.h	74;"	d
 PWR_TypeDef	cmsis_boot/stm32f0xx.h	/^} PWR_TypeDef;$/;"	t	typeref:struct:__anon29
 PendSV_Handler	src/stm32f0xx_it.c	/^void PendSV_Handler(void)$/;"	f
 PendSV_IRQn	cmsis_boot/stm32f0xx.h	/^  PendSV_IRQn                 = -2,     \/*!< 14 Cortex-M0 Pend SV Interrupt                          *\/$/;"	e	enum:IRQn
@@ -3311,9 +3358,13 @@ RTSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RTSR;         \/*!<EXTI Rising tri
 RXCRCR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t RXCRCR;   \/*!< SPI Rx CRC register (not used in I2S mode),          Address offset: 0x14 *\/$/;"	m	struct:__anon32
 RXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RXDR;         \/*!< CEC Rx Data Register,                                       Address offset:0x0C *\/$/;"	m	struct:__anon14
 RXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RXDR;     \/*!< I2C Receive data register,         Address offset: 0x24 *\/$/;"	m	struct:__anon27
-RX_SERIE	src/main.h	79;"	d
+RX_SERIE	src/hard.h	179;"	d
 ReadADC1	src/main.c	/^unsigned short ReadADC1 (unsigned char channel)$/;"	f
 Reset_Handler	cmsis_boot/startup/startup_stm32f0xx.s	/^Reset_Handler:$/;"	l
+S1_PIN	src/hard.h	29;"	d
+S1_PIN	src/hard.h	98;"	d
+S2_PIN	src/hard.h	101;"	d
+S2_PIN	src/hard.h	32;"	d
 SCB	cmsis_core/core_cm0.h	365;"	d
 SCB_AIRCR_ENDIANESS_Msk	cmsis_core/core_cm0.h	201;"	d
 SCB_AIRCR_ENDIANESS_Pos	cmsis_core/core_cm0.h	200;"	d
@@ -3472,7 +3523,7 @@ SR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SR;   \/*!< WWDG Status register,   
 SRAM_BASE	cmsis_boot/stm32f0xx.h	883;"	d
 SRC	Makefile	/^SRC  = .\/src\/main.c$/;"	m
 SSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SSR;        \/*!< RTC sub second register,                                  Address offset: 0x28 *\/$/;"	m	struct:__anon31
-STAND_BY	src/main.h	74;"	d
+STAND_BY	src/hard.h	174;"	d
 STM32F030	cmsis_boot/stm32f0xx.h	69;"	d
 STM32F030	cmsis_boot/stm32f0xx.h	97;"	d
 STM32F031	cmsis_boot/stm32f0xx.h	87;"	d
@@ -3660,9 +3711,9 @@ TDHR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDHR; \/*!< CAN mailbox data high 
 TDLR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDLR; \/*!< CAN mailbox data low register *\/$/;"	m	struct:__anon10
 TDR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t TDR;    \/*!< USART Transmit Data register,             Address offset: 0x28 *\/$/;"	m	struct:__anon35
 TDTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDTR; \/*!< CAN mailbox data length control and time stamp register *\/$/;"	m	struct:__anon10
-TEMP110_CAL_ADDR	src/main.c	543;"	d	file:
-TEMP30_CAL_ADDR	src/main.c	544;"	d	file:
-TEMP_SENSE	src/main.h	80;"	d
+TEMP110_CAL_ADDR	src/main.c	564;"	d	file:
+TEMP30_CAL_ADDR	src/main.c	565;"	d	file:
+TEMP_SENSE	src/hard.h	180;"	d
 TIM1	cmsis_boot/stm32f0xx.h	979;"	d
 TIM14	cmsis_boot/stm32f0xx.h	958;"	d
 TIM14_BASE	cmsis_boot/stm32f0xx.h	895;"	d
@@ -3928,14 +3979,14 @@ TXCRCR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t TXCRCR;   \/*!< SPI Tx CRC regis
 TXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TXDR;         \/*!< CEC Tx data register ,                                      Address offset:0x08 *\/$/;"	m	struct:__anon14
 TXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TXDR;     \/*!< I2C Transmit data register,        Address offset: 0x28 *\/$/;"	m	struct:__anon27
 TXD_IN	src/noritake_lcd.h	23;"	d
-TX_LCD	src/main.h	75;"	d
-TX_LCD2	src/main.h	76;"	d
+TX_LCD	src/hard.h	175;"	d
+TX_LCD2	src/hard.h	176;"	d
 TX_LCD_OFF	src/noritake_lcd.h	24;"	d
 TX_LCD_ON	src/noritake_lcd.h	25;"	d
-TX_SERIE	src/main.h	77;"	d
-TX_SERIE2	src/main.h	78;"	d
-TX_SERIE2_NC	src/main.h	82;"	d
-TX_SERIE_NC	src/main.h	81;"	d
+TX_SERIE	src/hard.h	177;"	d
+TX_SERIE2	src/hard.h	178;"	d
+TX_SERIE2_NC	src/hard.h	182;"	d
+TX_SERIE_NC	src/hard.h	181;"	d
 TX_SERIE_OFF	src/noritake_lcd.h	26;"	d
 TX_SERIE_ON	src/noritake_lcd.h	27;"	d
 Timer_1_Init	src/stm32f0x_tim.h	47;"	d
@@ -4111,11 +4162,12 @@ USARTx_receive	src/stm32f0x_uart.c	/^void USARTx_receive (void)$/;"	f
 USER	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t USER;         \/*!< FLASH option byte user options,                Address offset: 0x02 *\/$/;"	m	struct:__anon24
 Usart_Time_1ms	src/stm32f0x_uart.c	/^void Usart_Time_1ms (void)$/;"	f
 VAL	cmsis_core/core_cm0.h	/^  __IO uint32_t VAL;                          \/*!< Offset: 0x08  SysTick Current Value Register      *\/$/;"	m	struct:__anon3
-VDD_APPLI	src/main.c	546;"	d	file:
-VDD_CALIB	src/main.c	545;"	d	file:
+VDD_APPLI	src/main.c	567;"	d	file:
+VDD_CALIB	src/main.c	566;"	d	file:
+VER_2_0	src/hard.h	15;"	d
 VSCROLL	src/noritake_lcd.h	54;"	d
 WINR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t WINR; \/*!< IWDG Window register,    Address offset: 0x10 *\/$/;"	m	struct:__anon28
-WORKING	src/main.h	/^	WORKING = 1,$/;"	e	enum:end_states
+WORKING	src/hard.h	/^	WORKING = 1,$/;"	e	enum:end_states
 WPR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t WPR;        \/*!< RTC write protection register,                            Address offset: 0x24 *\/$/;"	m	struct:__anon31
 WRP0	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t WRP0;         \/*!< FLASH option byte write protection 0,          Address offset: 0x08 *\/$/;"	m	struct:__anon24
 WRP1	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t WRP1;         \/*!< FLASH option byte write protection 1,          Address offset: 0x0A *\/$/;"	m	struct:__anon24
@@ -4269,7 +4321,7 @@ buffrx_timeout	src/stm32f0x_uart.c	/^unsigned char buffrx_timeout = 0;$/;"	v
 bufftx	src/stm32f0x_uart.c	/^unsigned char bufftx[BUFFTX_DIM];$/;"	v
 bufftx_timeout	src/stm32f0x_uart.c	/^unsigned char bufftx_timeout = 0;$/;"	v
 command	src/noritake_lcd.c	/^unsigned char command [10];$/;"	v
-end_states	src/main.h	/^enum end_states$/;"	g
+end_states	src/hard.h	/^enum end_states$/;"	g
 errno	cmsis_boot/syscalls/syscalls.c	11;"	d	file:
 g_pfnVectors	cmsis_boot/startup/startup_stm32f0xx.s	/^g_pfnVectors:$/;"	l
 link	cmsis_boot/syscalls/syscalls.c	/^int link(char *old, char *new) {$/;"	f
@@ -4292,6 +4344,10 @@ s_antena	src/main.c	/^const char s_antena [] = { "ant5,052.00,130.00,000.60,065.
 s_antena	src/main.c	/^const char s_antena [] = { "ant6,010.60,078.20,002.00,065.00\\r\\n" };$/;"	v
 s_antena	src/main.c	/^const char s_antena [] = { "ant7,012.70,064.80,002.00,065.00\\r\\n" };$/;"	v
 s_antena	src/main.c	/^const char s_antena [] = { "ant8,022.60,157.20,001.10,065.00\\r\\n" };$/;"	v
+s_antena	src/main.c	/^const char s_antena [] = { "anta,002.20,021.71,003.00,065.00\\r\\n" };$/;"	v
+s_antena	src/main.c	/^const char s_antena [] = { "anta,002.70,019.40,003.00,065.00\\r\\n" };$/;"	v
+s_antena	src/main.c	/^const char s_antena [] = { "anta,003.50,023.25,003.00,065.00\\r\\n" };$/;"	v
+s_antena	src/main.c	/^const char s_antena [] = { "anta,005.60,015.40,003.00,065.00\\r\\n" };$/;"	v
 s_antena	src/main.c	/^const char s_antena [] = { "anta,007.20,041.40,004.00,065.00\\r\\n" };$/;"	v
 s_antena	src/main.c	/^const char s_antena [] = { "anta,008.60,045.00,002.50,065.00\\r\\n" };$/;"	v
 s_antena	src/main.c	/^const char s_antena [] = { "anta,009.00,045.00,003.50,065.00\\r\\n" };$/;"	v

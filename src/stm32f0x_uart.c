@@ -15,6 +15,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "hard.h"
 
 
 //--- Private typedef ---//

@@ -60,27 +60,6 @@
 
 //--- Exported types ---//
 //--- Exported constants ---//
-//--- Exported macro ---//
-enum end_states
-{
-	WORKING = 1,
-	END_OK,
-	END_ERROR,
-	END_TIMEOUT
-};
-//--- Exported functions ---//
-
-//ESTADOS DEL PROGRAMA PRINCIPAL
-#define STAND_BY	0
-#define TX_LCD		1
-#define TX_LCD2		2
-#define TX_SERIE	3
-#define TX_SERIE2	4
-#define RX_SERIE	5
-#define TEMP_SENSE	6
-#define TX_SERIE_NC		7
-#define TX_SERIE2_NC	8
-#define CONNECT	9
 
 
 //ESTADOS DEL LED DE COMUNICACION

@@ -1,4 +1,5 @@
 #include "stm32f0xx.h"
+#include "hard.h"
 #include "main.h"
 #include "stm32f0xx_adc.h"
 #include "stdio.h"
@@ -24,7 +25,11 @@
 //#define ANTENAA6 //antenas Ernesto tunel grande 350mm dia
 //#define ANTENAA7 //antenas Ernesto tunel mediano 240mm dia
 //#define ANTENAA1 //antenas Ernesto tunel chico 150mm dia
-#define ANTENAA9	//Nuevas Luis
+//#define ANTENAA9	//Nuevas Luis
+//#define ANTENAB0	//antenas Ernesto tunel 9" dia
+//#define ANTENAB1	//antenas Ernesto tunel 7" dia
+//#define ANTENAB2	//antenas Ernesto tunel 6" dia
+#define ANTENAB3	//antenas Ernesto tunel 6" dia
 
 //--- VARIABLES EXTERNAS ---//
 volatile unsigned char timer_1seg = 0;
@@ -36,7 +41,7 @@ volatile unsigned char *pbuffrx;
 const char s_ok [] = {"ok\r\n"};
 
 //--- VARIABLES GLOBALES ---//
-//antena, R [ohms], L [mHy], Imax [A], Tmax [°C] todos 000.00
+//antena, R [ohms], L [mHy], Imax [A], Tmax [ï¿½C] todos 000.00
 #ifdef ANTENA0 //toroidal diametro grande
 const char s_antena [] = { "ant0,012.27,087.90,001.80,065.00\r\n" };
 #endif
@@ -75,7 +80,7 @@ const char s_antena [] = { "ant7,012.70,064.80,002.00,065.00\r\n" };
 const char s_antena [] = { "ant8,022.60,157.20,001.10,065.00\r\n" };
 #endif
 
-//antena, R [ohms], L [mHy], Imax [A], Tmax [°C] todos 000.00
+//antena, R [ohms], L [mHy], Imax [A], Tmax [Â°C] todos 000.00
 #ifdef ANTENAA9 //toroidal diametro mediana antena nueva DE=110 DI=45
 const char s_antena [] = { "anta,023.80,133.00,001.10,065.00\r\n" };
 #endif
@@ -110,6 +115,22 @@ const char s_antena [] = { "anta,009.00,045.00,003.50,065.00\r\n" };
 
 #ifdef ANTENAA8 //antenas Ernesto tunel chico 150mm dia
 const char s_antena [] = { "anta,010.60,007.82,002.00,065.00\r\n" };
+#endif
+
+#ifdef ANTENAB0 //antenas Ernesto tunel 5,6ohm 15,4mHy 08-08-17
+const char s_antena [] = { "anta,005.60,015.40,003.00,065.00\r\n" };
+#endif
+
+#ifdef ANTENAB1 //antenas Ernesto tunel 08-08-17
+const char s_antena [] = { "anta,002.70,019.40,003.00,065.00\r\n" };
+#endif
+
+#ifdef ANTENAB2 //antenas Ernesto tunel 08-08-17
+const char s_antena [] = { "anta,003.50,023.25,003.00,065.00\r\n" };
+#endif
+
+#ifdef ANTENAB3 //antenas Ernesto tunel 08-08-17
+const char s_antena [] = { "anta,002.20,021.71,003.00,065.00\r\n" };
 #endif
 
 static __IO uint32_t TimingDelay;
