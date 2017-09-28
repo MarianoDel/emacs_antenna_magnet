@@ -88,7 +88,8 @@ void USART1Config(void)
 	//USART1->CR2 |= USART_CR2_STOP_1;	//2 bits stop
 //	USART1->CR1 = USART_CR1_RE | USART_CR1_TE | USART_CR1_UE;
 //	USART1->CR1 = USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_UE;	//SIN TX
-	USART1->CR1 = USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_TE | USART_CR1_UE;	//para pruebas TX
+	// USART1->CR1 = USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_TE | USART_CR1_UE;	//para pruebas TX
+	USART1->CR1 = USART_CR1_TE | USART_CR1_UE;	//para pruebas solo TX
 
 	//habilito el pin
 	GPIOA->AFR[0] = 0x00001100;	//PA2 -> AF1 PA3 -> AF1
@@ -132,15 +133,10 @@ void USART1_IRQHandler(void)
 
 				buffrx_ready = 1;
 				pbuffrx = buffrx;
+				pbuffrx_cpy = buffrx_cpy;
 			}
 			else
-			{
 				pbuffrx++;
-
-				if (pbuffrx == &buffrx[BUFFRX_DIM])
-					pbuffrx = buffrx;
-			}
-
 
 		}
 		else
@@ -275,6 +271,17 @@ unsigned char USART1Send(char * send)
 
 
 	return WORKING;
+}
+
+void Usart1RxDisable (void)
+{
+	USART1->CR1 &= ~USART_CR1_RXNEIE;
+	USART1->CR1 &= ~USART_CR1_RE;
+}
+
+void Usart1RxEnable (void)
+{
+	USART1->CR1 |= USART_CR1_RXNEIE | USART_CR1_RE;
 }
 
 #endif	//USE_USART1

@@ -306,21 +306,22 @@ int main(void)
 	*/
     //--- FIN PROGRAMA STRING COMUNICACION ONE-WIRE ---//
 
-	 while (1) {
-	 	/* code */
-		if (!timer_standby)
-		{
-			timer_standby = 6000;
-			USART1Send((char *)s_antena);
-		}
-
-
-		if (TXD_IN)
-			TX_SERIE_OFF;
-		else
-			TX_SERIE_ON;
-
-	 }
+	//  while (1) {
+	//  	/* code */
+	// 	if (!timer_standby)
+	// 	{
+	// 		timer_standby = 6000;
+	 //
+	// 		USART1Send((char *)s_antena);
+	// 	}
+	 //
+	 //
+	// 	if (TXD_IN)
+	// 		TX_SERIE_OFF;
+	// 	else
+	// 		TX_SERIE_ON;
+	 //
+	//  }
 
 	//--- Main loop ---//
 	while(1)
@@ -335,6 +336,7 @@ int main(void)
 				{
 					LED_COMM_ON;
 					state = TX_SERIE_NC;
+					Usart1RxDisable();
 					USART1Send((char *)s_antena);
 				}
 
@@ -355,6 +357,8 @@ int main(void)
 					answer = 0;
 					LED_COMM_OFF;
 					state = TX_SERIE;
+					//apago RX
+					Usart1RxDisable();
 					USART1Send((char *)s_ok);
 				}
 
@@ -365,7 +369,7 @@ int main(void)
 					LED_COMM_OFF;
 					state = TX_SERIE;
 					//apago RX
-
+					Usart1RxDisable();
 					USART1Send((char *)s_antena);
 				}
 
@@ -388,7 +392,9 @@ int main(void)
 
 				    memset(str1, 0, sizeof(str1));
 				    sprintf(str1, "temp,%03d.00\r\n", temp);
-					USART1Send(str1);
+					 //apago RX
+					 Usart1RxDisable();
+					 USART1Send(str1);
 				}
 
 				if (buffrx_ready)
@@ -460,6 +466,7 @@ int main(void)
 					state = CONNECT;
 					TX_SERIE_OFF;			//dejo la linea en idle
 					LED_COMM_ON;
+					Usart1RxEnable();
 				}
 				break;
 
@@ -491,6 +498,7 @@ int main(void)
 					TX_SERIE_OFF;			//dejo la linea en idle
 					timer_standby = 1000;
 					LED_COMM_OFF;
+					Usart1RxEnable();
 				}
 				break;
 
@@ -499,6 +507,7 @@ int main(void)
 				//si entiendo el mensaje
 				answer = 0;
 				a = InterpretarMsg ((char *)pbuffrx_cpy);
+				//a = InterpretarMsg ((char *)pbuffrx);
 
 				switch (a)
 				{
