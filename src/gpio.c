@@ -72,8 +72,6 @@ void GPIO_Config (void)
 	temp = GPIOA->MODER;
 	temp &= 0xFFFFC00F;	//PA2 PA3 alternative PIN 4 5 y 6 out, 7 in
 	temp |= 0x000015A0; //Cada 2 bits un pin.
-	//temp &= 0xFFFFFCFC;	//PIN0, 1, 4 y 5 out
-	//temp |= 0x00000101; //Cada 2 bits un pin.
 	GPIOA->MODER = temp;
 
 	temp = GPIOA->OTYPER;
@@ -82,8 +80,6 @@ void GPIO_Config (void)
 	GPIOA->OTYPER = temp;
 
 	temp = GPIOA->OSPEEDR;
-	//temp &= 0xFFFFFCFC;
-	//temp |= 0x00000303;
 	temp &= 0xFFFFC0FF;
 	temp |= 0x00000000;
 	GPIOA->OSPEEDR = temp;
@@ -96,21 +92,17 @@ void GPIO_Config (void)
 
 #if ((defined VER_2_0) || (defined VER_1_2) || (defined VER_1_3))
 	temp = GPIOA->MODER;
-	temp &= 0xFFFFC0FF;	//PIN 4 5 y 6 out, 7 in
-	temp |= 0x00001500; //Cada 2 bits un pin.
-	//temp &= 0xFFFFFCFC;	//PIN0, 1, 4 y 5 out
-	//temp |= 0x00000101; //Cada 2 bits un pin.
+	temp &= 0xFFFFFC03;	//PA1 analog; PA2 PA3 alternative; PA4 output
+	temp |= 0x000001AC;
 	GPIOA->MODER = temp;
 
 	temp = GPIOA->OTYPER;
-	temp &= 0xFFFFC0FF;
-	temp |= 0x00001500;
+	temp &= 0xFFFFFFFF;
+	temp |= 0x00000000;
 	GPIOA->OTYPER = temp;
 
 	temp = GPIOA->OSPEEDR;
-	//temp &= 0xFFFFFCFC;
-	//temp |= 0x00000303;
-	temp &= 0xFFFFC0FF;
+	temp &= 0xFFFFFCFF;
 	temp |= 0x00000000;
 	GPIOA->OSPEEDR = temp;
 

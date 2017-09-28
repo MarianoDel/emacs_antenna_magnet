@@ -208,6 +208,7 @@ int main(void)
 	 //FIN PRUEBA DE SYSTICK
 
 	//ADC configuration.
+	Usart1RxDisable();
 	if (ADC_Conf() == 0)
 		USART1Send("\r\nERROR DE CALIBRACION...");
 	else
@@ -228,7 +229,9 @@ int main(void)
     sprintf(str1, "%d", ts_cal2);
     USART1Send(str1);
     dx = ts_cal1 - ts_cal2;
-    Wait_ms(2000);
+    Wait_ms(100);
+	 Usart1RxEnable();
+	 Wait_ms(1900);
 
 	//  while (1)
 	//  {
@@ -409,6 +412,7 @@ int main(void)
 				}
 				break;
 
+#ifdef VER_1_1
 			case TX_LCD:
 				//espero terminar de transmitir
 				if (!(USART1->CR1 & 0x80))
@@ -438,7 +442,7 @@ int main(void)
 					TX_LCD_ON;
 
 				break;
-
+#endif
 			case TX_SERIE:
 				//espero terminar de transmitir
 				if (!(USART1->CR1 & 0x80))
@@ -446,25 +450,28 @@ int main(void)
 					state = TX_SERIE2;
 					timer_standby = 2;
 				}
-
+#ifdef VER_1_1
 				if (TXD_IN)
 					TX_SERIE_OFF;
 				else
 					TX_SERIE_ON;
-
+#endif
 				break;
 
 			case TX_SERIE2:
+#ifdef VER_1_1
 				//espero terminar de transmitir
 				if (TXD_IN)
 					TX_SERIE_OFF;
 				else
 					TX_SERIE_ON;
-
+#endif
 				if (!timer_standby)
 				{
 					state = CONNECT;
+#ifdef VER_1_1
 					TX_SERIE_OFF;			//dejo la linea en idle
+#endif
 					LED_COMM_ON;
 					Usart1RxEnable();
 				}
@@ -478,24 +485,29 @@ int main(void)
 					timer_standby = 2;
 				}
 
+#ifdef VER_1_1
 				if (TXD_IN)
 					TX_SERIE_OFF;
 				else
 					TX_SERIE_ON;
-
+#endif
 				break;
 
 			case TX_SERIE2_NC:
+#ifdef VER_1_1
 				//espero terminar de transmitir
 				if (TXD_IN)
 					TX_SERIE_OFF;
 				else
 					TX_SERIE_ON;
+#endif
 
 				if (!timer_standby)
 				{
 					state = STAND_BY;
+#ifdef VER_1_1
 					TX_SERIE_OFF;			//dejo la linea en idle
+#endif
 					timer_standby = 1000;
 					LED_COMM_OFF;
 					Usart1RxEnable();

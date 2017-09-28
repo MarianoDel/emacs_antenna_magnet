@@ -89,7 +89,12 @@ void USART1Config(void)
 //	USART1->CR1 = USART_CR1_RE | USART_CR1_TE | USART_CR1_UE;
 //	USART1->CR1 = USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_UE;	//SIN TX
 	// USART1->CR1 = USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_TE | USART_CR1_UE;	//para pruebas TX
+#ifdef VER_2_0
+	USART1->CR2 |= USART_CR2_TXINV;	//tx invertido
+#endif
+
 	USART1->CR1 = USART_CR1_TE | USART_CR1_UE;	//para pruebas solo TX
+
 
 	//habilito el pin
 	GPIOA->AFR[0] = 0x00001100;	//PA2 -> AF1 PA3 -> AF1
