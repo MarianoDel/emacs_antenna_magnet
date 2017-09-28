@@ -205,6 +205,11 @@ int main(void)
 	 }
 	 */
 	 //FIN PRUEBA DE SYSTICK
+	 while (1)
+	 {
+		USART1Send("\r\n");
+		Wait_ms(200);
+	 }
 
 	//ADC configuration.
 	if (ADC_Conf() == 0)

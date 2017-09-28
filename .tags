@@ -3732,8 +3732,8 @@ TDHR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDHR; \/*!< CAN mailbox data high 
 TDLR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDLR; \/*!< CAN mailbox data low register *\/$/;"	m	struct:__anon10
 TDR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t TDR;    \/*!< USART Transmit Data register,             Address offset: 0x28 *\/$/;"	m	struct:__anon35
 TDTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDTR; \/*!< CAN mailbox data length control and time stamp register *\/$/;"	m	struct:__anon10
-TEMP110_CAL_ADDR	src/main.c	581;"	d	file:
-TEMP30_CAL_ADDR	src/main.c	582;"	d	file:
+TEMP110_CAL_ADDR	src/main.c	586;"	d	file:
+TEMP30_CAL_ADDR	src/main.c	587;"	d	file:
 TEMP_SENSE	src/hard.h	199;"	d
 TIM1	cmsis_boot/stm32f0xx.h	979;"	d
 TIM14	cmsis_boot/stm32f0xx.h	958;"	d
@@ -4180,8 +4180,8 @@ Usart2Send	src/uart.c	/^void Usart2Send (char * send)$/;"	f
 Usart2SendSingle	src/uart.c	/^void Usart2SendSingle(unsigned char tosend)$/;"	f
 Usart2SendUnsigned	src/uart.c	/^void Usart2SendUnsigned(unsigned char * send, unsigned char size)$/;"	f
 VAL	cmsis_core/core_cm0.h	/^  __IO uint32_t VAL;                          \/*!< Offset: 0x08  SysTick Current Value Register      *\/$/;"	m	struct:__anon3
-VDD_APPLI	src/main.c	584;"	d	file:
-VDD_CALIB	src/main.c	583;"	d	file:
+VDD_APPLI	src/main.c	589;"	d	file:
+VDD_CALIB	src/main.c	588;"	d	file:
 VER_1_1	src/hard.h	16;"	d
 VSCROLL	src/noritake_lcd.h	40;"	d
 WINR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t WINR; \/*!< IWDG Window register,    Address offset: 0x10 *\/$/;"	m	struct:__anon28
