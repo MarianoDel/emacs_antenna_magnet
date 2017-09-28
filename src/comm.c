@@ -5,8 +5,8 @@
  *      Author: Mariano
  */
 
-#include "main.h"
 #include "comm.h"
+#include <string.h>
 //externas
 
 extern const char s_ok [];
@@ -48,29 +48,29 @@ unsigned char InterpretarMsg (char * pStr)	//TODO copiar payload solo en las cue
 //		return CMD_DISPLAY;
 //	}
 	//ahora tengo el comando y ademas el payload en pc
-	
-	return ERROR;	
+
+	return ERROR;
 }
 
 void AnalizarMsg (char * pStr)
 {
 	unsigned char a;
-	
+
 	//reviso si el mensaje es para mi o si es canal 0, no asignado
 	/*
 	if (!Check_Own_Channel(pStr))
 		return;
 	*/
 	a = InterpretarMsg (pStr);
-	
+
 	switch (a)
 	{
 		case GET_PARAMS:
 			break;
-			
+
 		case GET_TEMP:
 			break;
-			
+
 		case GET_GAUSS:
 			break;
 
@@ -82,7 +82,7 @@ void AnalizarMsg (char * pStr)
 
 		case CMD_DISPLAY:
 			break;
-			
+
 		case ERROR:
 		default:
 			break;

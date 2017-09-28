@@ -111,7 +111,7 @@ AHBRSTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t AHBRSTR;    \/*!< RCC AHB perip
 AIRCR	cmsis_core/core_cm0.h	/^  __IO uint32_t AIRCR;                        \/*!< Offset: 0x0C  Application Interrupt \/ Reset Control Register        *\/$/;"	m	struct:__anon2
 ALRMAR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ALRMAR;     \/*!< RTC alarm A register,                                     Address offset: 0x1C *\/$/;"	m	struct:__anon31
 ALRMASSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ALRMASSR;   \/*!< RTC alarm A sub second register,                          Address offset: 0x44 *\/$/;"	m	struct:__anon31
-ANTENAB3	src/main.c	32;"	d	file:
+ANTENAB3	src/main.c	37;"	d	file:
 APB1ENR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t APB1ENR;    \/*!< RCC APB1 peripheral clock enable register,                   Address offset: 0x1C *\/$/;"	m	struct:__anon30
 APB1FZ	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t APB1FZ;       \/*!< Debug MCU APB1 freeze register,              Address offset: 0x08 *\/$/;"	m	struct:__anon19
 APB1RSTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t APB1RSTR;   \/*!< RCC APB1 peripheral reset register,                          Address offset: 0x10 *\/$/;"	m	struct:__anon30
@@ -135,13 +135,11 @@ BKP3R	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t BKP3R;      \/*!< RTC backup regi
 BKP4R	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t BKP4R;      \/*!< RTC backup register 4,                                    Address offset: 0x60 *\/$/;"	m	struct:__anon31
 BRR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t BRR;          \/*!< GPIO bit reset register,                                  Address offset: 0x28 *\/$/;"	m	struct:__anon25
 BRR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t BRR;    \/*!< USART Baud rate register,                 Address offset: 0x0C *\/$/;"	m	struct:__anon35
-BS	src/noritake_lcd.h	44;"	d
+BS	src/noritake_lcd.h	30;"	d
 BSRR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t BSRR;         \/*!< GPIO port bit set\/reset registerBSRR,                     Address offset: 0x18 *\/$/;"	m	struct:__anon25
 BTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t              BTR;                 \/*!< CAN bit timing register,             Address offset: 0x1C          *\/$/;"	m	struct:__anon13
-BUFFRX_DIM	src/stm32f0x_uart.c	24;"	d	file:
-BUFFRX_TIMEOUT	src/stm32f0x_uart.c	30;"	d	file:
-BUFFTX_DIM	src/stm32f0x_uart.c	25;"	d	file:
-BUFFTX_TIMEOUT	src/stm32f0x_uart.c	31;"	d	file:
+BUFFRX_DIM	src/uart.c	29;"	d	file:
+BUFFTX_DIM	src/uart.c	30;"	d	file:
 CAL	cmsis_boot/stm32f0xx.h	745;"	d
 CALIB	cmsis_core/core_cm0.h	/^  __I  uint32_t CALIB;                        \/*!< Offset: 0x0C  SysTick Calibration Register        *\/$/;"	m	struct:__anon3
 CALR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CALR;       \/*!< RTC calibration register,                                 Address offset: 0x3C *\/$/;"	m	struct:__anon31
@@ -1332,10 +1330,10 @@ CFGR3	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CFGR3;      \/*!< RCC clock confi
 CFR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CFR;  \/*!< WWDG Configuration register, Address offset: 0x04 *\/$/;"	m	struct:__anon36
 CHANNEL	src/comm.h	14;"	d
 CHSELR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CHSELR;       \/*!< ADC channel selection register,                             Address offset:0x28 *\/$/;"	m	struct:__anon8
-CH_IN_TEMP	src/hard.h	155;"	d
+CH_IN_TEMP	src/hard.h	174;"	d
 CH_IN_TEMP	src/hard.h	86;"	d
 CIR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CIR;        \/*!< RCC clock interrupt register,                                Address offset: 0x08 *\/$/;"	m	struct:__anon30
-CLR	src/noritake_lcd.h	49;"	d
+CLR	src/noritake_lcd.h	35;"	d
 CMAR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CMAR;         \/*!< DMA channel x memory address register                                          *\/$/;"	m	struct:__anon20
 CMD_DISPLAY	src/comm.h	16;"	d
 CNDTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CNDTR;        \/*!< DMA channel x number of data register                                          *\/$/;"	m	struct:__anon20
@@ -1382,7 +1380,7 @@ COMP_CSR_COMP2OUTSEL_2	cmsis_boot/stm32f0xx.h	2492;"	d
 COMP_CSR_COMP2POL	cmsis_boot/stm32f0xx.h	2493;"	d
 COMP_CSR_WNDWEN	cmsis_boot/stm32f0xx.h	2488;"	d
 COMP_TypeDef	cmsis_boot/stm32f0xx.h	/^} COMP_TypeDef;$/;"	t	typeref:struct:__anon15
-CONNECT	src/hard.h	183;"	d
+CONNECT	src/hard.h	202;"	d
 CORELIBDIR	Makefile	/^CORELIBDIR = .\/cmsis_core$/;"	m
 CP	Makefile	/^CP   = $(TRGT)objcopy$/;"	m
 CPAR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CPAR;         \/*!< DMA channel x peripheral address register                                      *\/$/;"	m	struct:__anon20
@@ -1400,7 +1398,7 @@ CR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CR;       \/*!< DAC control register
 CR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CR;   \/*!< PWR power control register,        Address offset: 0x00 *\/$/;"	m	struct:__anon29
 CR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CR;   \/*!< WWDG Control register,       Address offset: 0x00 *\/$/;"	m	struct:__anon36
 CR	cmsis_boot/stm32f0xx.h	/^__IO uint32_t CR;     \/*!< CRS ccontrol register,              Address offset: 0x00 *\/$/;"	m	struct:__anon17
-CR	src/noritake_lcd.h	48;"	d
+CR	src/noritake_lcd.h	34;"	d
 CR1	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t CR1;             \/*!< TIM control register 1,                      Address offset: 0x00 *\/$/;"	m	struct:__anon33
 CR1	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t CR1;      \/*!< SPI Control register 1 (not used in I2S mode),       Address offset: 0x00 *\/$/;"	m	struct:__anon32
 CR1	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CR1;      \/*!< I2C Control register 1,            Address offset: 0x00 *\/$/;"	m	struct:__anon27
@@ -1465,11 +1463,11 @@ CSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CSR;        \/*!< RCC clock control
 CSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CSR;     \/*!< COMP comparator control and status register, Address offset: 0x1C *\/$/;"	m	struct:__anon15
 CSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CSR;  \/*!< PWR power control\/status register, Address offset: 0x04 *\/$/;"	m	struct:__anon29
 CTRL	cmsis_core/core_cm0.h	/^  __IO uint32_t CTRL;                         \/*!< Offset: 0x00  SysTick Control and Status Register *\/$/;"	m	struct:__anon3
-CTRL_FAN	src/hard.h	104;"	d
+CTRL_FAN	src/hard.h	123;"	d
 CTRL_FAN	src/hard.h	35;"	d
-CTRL_FAN_OFF	src/hard.h	106;"	d
+CTRL_FAN_OFF	src/hard.h	125;"	d
 CTRL_FAN_OFF	src/hard.h	37;"	d
-CTRL_FAN_ON	src/hard.h	105;"	d
+CTRL_FAN_ON	src/hard.h	124;"	d
 CTRL_FAN_ON	src/hard.h	36;"	d
 CopyDataInit	cmsis_boot/startup/startup_stm32f0xx.s	/^CopyDataInit:$/;"	l
 CoreDebug	cmsis_core/core_cm0.h	368;"	d
@@ -1611,8 +1609,8 @@ DHR8RD	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t DHR8RD;   \/*!< DUAL DAC 8-bit r
 DIER	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t DIER;            \/*!< TIM DMA\/interrupt enable register,           Address offset: 0x0C *\/$/;"	m	struct:__anon33
 DINCDIR	Makefile	/^DINCDIR = .\/src$/;"	m
 DISABLE	cmsis_boot/stm32f0xx.h	/^typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;$/;"	e	enum:__anon6
-DISA_SERIAL	src/noritake_lcd.h	21;"	d
-DISA_SERIAL_LCD	src/noritake_lcd.h	18;"	d
+DISA_SERIAL	src/hard.h	96;"	d
+DISA_SERIAL_LCD	src/hard.h	93;"	d
 DLIBDIR	Makefile	/^DLIBDIR =$/;"	m
 DLIBS	Makefile	/^DLIBS =$/;"	m
 DMA1	cmsis_boot/stm32f0xx.h	987;"	d
@@ -1714,7 +1712,7 @@ DMA_ISR_TEIF5	cmsis_boot/stm32f0xx.h	2716;"	d
 DMA_ISR_TEIF6	cmsis_boot/stm32f0xx.h	2720;"	d
 DMA_ISR_TEIF7	cmsis_boot/stm32f0xx.h	2724;"	d
 DMA_TypeDef	cmsis_boot/stm32f0xx.h	/^} DMA_TypeDef;$/;"	t	typeref:struct:__anon21
-DMX_INPUT	src/hard.h	137;"	d
+DMX_INPUT	src/hard.h	156;"	d
 DMX_INPUT	src/hard.h	68;"	d
 DOR1	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t DOR1;     \/*!< DAC channel1 data output register,                       Address offset: 0x2C *\/$/;"	m	struct:__anon18
 DOR2	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t DOR2;     \/*!< DAC channel2 data output register,                       Address offset: 0x30 *\/$/;"	m	struct:__anon18
@@ -1727,20 +1725,22 @@ Delay	src/main.c	/^void Delay(__IO uint32_t nTime)$/;"	f
 EGR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t EGR;             \/*!< TIM event generation register,               Address offset: 0x14 *\/$/;"	m	struct:__anon33
 EMR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t EMR;          \/*!<EXTI Event mask register,                                 Address offset: 0x04 *\/$/;"	m	struct:__anon22
 ENABLE	cmsis_boot/stm32f0xx.h	/^typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;$/;"	e	enum:__anon6
-ENA_SERIAL	src/noritake_lcd.h	20;"	d
-ENA_SERIAL_LCD	src/noritake_lcd.h	17;"	d
+ENA_SERIAL	src/hard.h	95;"	d
+ENA_SERIAL_LCD	src/hard.h	92;"	d
 END_ERROR	src/hard.h	/^	END_ERROR,$/;"	e	enum:end_states
 END_OK	src/hard.h	/^	END_OK,$/;"	e	enum:end_states
 END_TIMEOUT	src/hard.h	/^	END_TIMEOUT$/;"	e	enum:end_states
 ERROR	cmsis_boot/stm32f0xx.h	/^typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrorStatus;$/;"	e	enum:__anon7
 ERROR	src/comm.h	19;"	d
-ESC	src/noritake_lcd.h	50;"	d
+ESC	src/noritake_lcd.h	36;"	d
 ESR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t              ESR;                 \/*!< CAN error status register,           Address offset: 0x18          *\/$/;"	m	struct:__anon13
 EXTI	cmsis_boot/stm32f0xx.h	976;"	d
 EXTI0_1_IRQn	cmsis_boot/stm32f0xx.h	/^  EXTI0_1_IRQn                = 5,      \/*!< EXTI Line 0 and 1 Interrupts                            *\/$/;"	e	enum:IRQn
 EXTI2_3_IRQn	cmsis_boot/stm32f0xx.h	/^  EXTI2_3_IRQn                = 6,      \/*!< EXTI Line 2 and 3 Interrupts                            *\/$/;"	e	enum:IRQn
 EXTI4_15_IRQn	cmsis_boot/stm32f0xx.h	/^  EXTI4_15_IRQn               = 7,      \/*!< EXTI Line 4 to 15 Interrupts                            *\/$/;"	e	enum:IRQn
 EXTICR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t EXTICR[4];   \/*!< SYSCFG external interrupt configuration register,     Address offset: 0x14-0x08 *\/$/;"	m	struct:__anon26
+EXTIOff	src/gpio.c	/^inline void EXTIOff (void)$/;"	f
+EXTIOn	src/gpio.c	/^inline void EXTIOn (void)$/;"	f
 EXTI_BASE	cmsis_boot/stm32f0xx.h	913;"	d
 EXTI_EMR_MR0	cmsis_boot/stm32f0xx.h	2829;"	d
 EXTI_EMR_MR1	cmsis_boot/stm32f0xx.h	2830;"	d
@@ -1961,9 +1961,13 @@ GET_PARAMS	src/comm.h	11;"	d
 GET_TEMP	src/comm.h	12;"	d
 GPIOA	cmsis_boot/stm32f0xx.h	1001;"	d
 GPIOA_BASE	cmsis_boot/stm32f0xx.h	939;"	d
+GPIOA_CLK	src/gpio.h	31;"	d
 GPIOA_CLK	src/stm32f0x_gpio.h	28;"	d
+GPIOA_CLK_OFF	src/gpio.h	33;"	d
 GPIOA_CLK_OFF	src/stm32f0x_gpio.h	30;"	d
+GPIOA_CLK_ON	src/gpio.h	32;"	d
 GPIOA_CLK_ON	src/stm32f0x_gpio.h	29;"	d
+GPIOA_ENABLE	src/gpio.h	25;"	d
 GPIOA_ENABLE	src/stm32f0x_gpio.h	25;"	d
 GPIOA_PIN0_IN	src/stm32f0x_gpio.h	49;"	d
 GPIOA_PIN0_OFF	src/stm32f0x_gpio.h	52;"	d
@@ -2031,25 +2035,37 @@ GPIOA_PIN9_ON	src/stm32f0x_gpio.h	96;"	d
 GPIOA_PIN9_OUT	src/stm32f0x_gpio.h	95;"	d
 GPIOB	cmsis_boot/stm32f0xx.h	1002;"	d
 GPIOB_BASE	cmsis_boot/stm32f0xx.h	940;"	d
+GPIOB_CLK	src/gpio.h	35;"	d
 GPIOB_CLK	src/stm32f0x_gpio.h	32;"	d
+GPIOB_CLK_OFF	src/gpio.h	37;"	d
 GPIOB_CLK_OFF	src/stm32f0x_gpio.h	34;"	d
+GPIOB_CLK_ON	src/gpio.h	36;"	d
 GPIOB_CLK_ON	src/stm32f0x_gpio.h	33;"	d
 GPIOC	cmsis_boot/stm32f0xx.h	1003;"	d
 GPIOC_BASE	cmsis_boot/stm32f0xx.h	941;"	d
+GPIOC_CLK	src/gpio.h	39;"	d
 GPIOC_CLK	src/stm32f0x_gpio.h	36;"	d
+GPIOC_CLK_OFF	src/gpio.h	41;"	d
 GPIOC_CLK_OFF	src/stm32f0x_gpio.h	38;"	d
+GPIOC_CLK_ON	src/gpio.h	40;"	d
 GPIOC_CLK_ON	src/stm32f0x_gpio.h	37;"	d
 GPIOD	cmsis_boot/stm32f0xx.h	1004;"	d
 GPIOD_BASE	cmsis_boot/stm32f0xx.h	942;"	d
+GPIOD_CLK	src/gpio.h	43;"	d
 GPIOD_CLK	src/stm32f0x_gpio.h	40;"	d
+GPIOD_CLK_OFF	src/gpio.h	45;"	d
 GPIOD_CLK_OFF	src/stm32f0x_gpio.h	42;"	d
+GPIOD_CLK_ON	src/gpio.h	44;"	d
 GPIOD_CLK_ON	src/stm32f0x_gpio.h	41;"	d
 GPIOE	cmsis_boot/stm32f0xx.h	1005;"	d
 GPIOE_BASE	cmsis_boot/stm32f0xx.h	943;"	d
 GPIOF	cmsis_boot/stm32f0xx.h	1006;"	d
 GPIOF_BASE	cmsis_boot/stm32f0xx.h	944;"	d
+GPIOF_CLK	src/gpio.h	47;"	d
 GPIOF_CLK	src/stm32f0x_gpio.h	44;"	d
+GPIOF_CLK_OFF	src/gpio.h	49;"	d
 GPIOF_CLK_OFF	src/stm32f0x_gpio.h	46;"	d
+GPIOF_CLK_ON	src/gpio.h	48;"	d
 GPIOF_CLK_ON	src/stm32f0x_gpio.h	45;"	d
 GPIOF_PIN0_IN	src/stm32f0x_gpio.h	129;"	d
 GPIOF_PIN0_OFF	src/stm32f0x_gpio.h	132;"	d
@@ -2139,6 +2155,7 @@ GPIO_BSRR_BS_6	cmsis_boot/stm32f0xx.h	3326;"	d
 GPIO_BSRR_BS_7	cmsis_boot/stm32f0xx.h	3327;"	d
 GPIO_BSRR_BS_8	cmsis_boot/stm32f0xx.h	3328;"	d
 GPIO_BSRR_BS_9	cmsis_boot/stm32f0xx.h	3329;"	d
+GPIO_Config	src/gpio.c	/^void GPIO_Config (void)$/;"	f
 GPIO_Config	src/stm32f0x_gpio.c	/^void GPIO_Config (void)$/;"	f
 GPIO_IDR_0	cmsis_boot/stm32f0xx.h	3284;"	d
 GPIO_IDR_1	cmsis_boot/stm32f0xx.h	3285;"	d
@@ -2402,15 +2419,15 @@ GTPR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t GTPR;   \/*!< USART Guard time and
 GetTemp	src/main.c	/^int GetTemp (unsigned short adc_temp)$/;"	f
 HARD_H_	src/hard.h	9;"	d
 HEX	Makefile	/^HEX  = $(CP) -O ihex$/;"	m
-HOM	src/noritake_lcd.h	47;"	d
-HSCROLL	src/noritake_lcd.h	55;"	d
+HOM	src/noritake_lcd.h	33;"	d
+HSCROLL	src/noritake_lcd.h	41;"	d
 HSE_STARTUP_TIMEOUT	cmsis_boot/stm32f0xx.h	130;"	d
 HSE_VALUE	cmsis_boot/stm32f0xx.h	122;"	d
 HSI14_VALUE	cmsis_boot/stm32f0xx.h	148;"	d
 HSI48_VALUE	cmsis_boot/stm32f0xx.h	154;"	d
 HSI_STARTUP_TIMEOUT	cmsis_boot/stm32f0xx.h	138;"	d
 HSI_VALUE	cmsis_boot/stm32f0xx.h	142;"	d
-HT	src/noritake_lcd.h	45;"	d
+HT	src/noritake_lcd.h	31;"	d
 HardFault_Handler	src/stm32f0xx_it.c	/^void HardFault_Handler(void)$/;"	f
 HardFault_IRQn	cmsis_boot/stm32f0xx.h	/^  HardFault_IRQn              = -13,    \/*!< 3 Cortex-M0 Hard Fault Interrupt                        *\/$/;"	e	enum:IRQn
 I2C1	cmsis_boot/stm32f0xx.h	966;"	d
@@ -2564,16 +2581,16 @@ LCD_Str	src/noritake_lcd.c	/^void LCD_Str(unsigned char * pstr)$/;"	f
 LCKR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t LCKR;         \/*!< GPIO port configuration lock register,                    Address offset: 0x1C *\/$/;"	m	struct:__anon25
 LDFLAGS	Makefile	/^LDFLAGS = $(MCFLAGS) -mthumb --specs=nano.specs -Wl,--gc-sections -nostartfiles -T$(LDSCRIPT) -Wl,-Map=$(FULL_PRJ).map,--cref,--no-warn-mismatch $(LIBDIR)$/;"	m
 LDSCRIPT	Makefile	/^LDSCRIPT = $(LINKER)\/stm32_flash.ld$/;"	m
+LED	src/hard.h	112;"	d
 LED	src/hard.h	24;"	d
-LED	src/hard.h	93;"	d
-LED_COMM	src/noritake_lcd.h	29;"	d
-LED_COMM_OFF	src/noritake_lcd.h	31;"	d
-LED_COMM_ON	src/noritake_lcd.h	30;"	d
+LED_COMM	src/hard.h	105;"	d
+LED_COMM_OFF	src/hard.h	107;"	d
+LED_COMM_ON	src/hard.h	106;"	d
+LED_OFF	src/hard.h	114;"	d
 LED_OFF	src/hard.h	26;"	d
-LED_OFF	src/hard.h	95;"	d
+LED_ON	src/hard.h	113;"	d
 LED_ON	src/hard.h	25;"	d
-LED_ON	src/hard.h	94;"	d
-LF	src/noritake_lcd.h	46;"	d
+LF	src/noritake_lcd.h	32;"	d
 LIBDIR	Makefile	/^LIBDIR  = $(patsubst %,-L%,$(DLIBDIR) $(ULIBDIR))$/;"	m
 LIBS	Makefile	/^LIBS    = $(DLIBS) $(ULIBS)$/;"	m
 LIBSDIR	Makefile	/^LIBSDIR    = ..\/STM32F0xx_StdPeriph_Lib_V1.3.1\/Libraries\/STM32F0xx_StdPeriph_Driver$/;"	m
@@ -2623,18 +2640,18 @@ OB_WRP3_WRP3	cmsis_boot/stm32f0xx.h	3057;"	d
 OB_WRP3_nWRP3	cmsis_boot/stm32f0xx.h	3058;"	d
 OCDCMN	Makefile	/^OCDCMN = -c "program $(FULL_PRJ).bin verify reset exit"$/;"	m
 ODR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t ODR;          \/*!< GPIO port output data register,                           Address offset: 0x14 *\/$/;"	m	struct:__anon25
-OE	src/hard.h	149;"	d
+OE	src/hard.h	168;"	d
 OE	src/hard.h	80;"	d
-OE_OFF	src/hard.h	150;"	d
+OE_OFF	src/hard.h	169;"	d
 OE_OFF	src/hard.h	81;"	d
-OE_ON	src/hard.h	151;"	d
+OE_ON	src/hard.h	170;"	d
 OE_ON	src/hard.h	82;"	d
 OPT	Makefile	/^OPT = -O0$/;"	m
 OPTKEYR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t OPTKEYR;      \/*!<FLASH OPT key register,                        Address offset: 0x08 *\/$/;"	m	struct:__anon23
 OR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t OR;              \/*!< TIM option register,                         Address offset: 0x50 *\/$/;"	m	struct:__anon33
 OSPEEDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t OSPEEDR;      \/*!< GPIO port output speed register,                          Address offset: 0x08 *\/$/;"	m	struct:__anon25
 OTYPER	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t OTYPER;       \/*!< GPIO port output type register,                           Address offset: 0x04 *\/$/;"	m	struct:__anon25
-OVRWR	src/noritake_lcd.h	53;"	d
+OVRWR	src/noritake_lcd.h	39;"	d
 PECR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t PECR;     \/*!< I2C PEC register,                  Address offset: 0x20 *\/$/;"	m	struct:__anon27
 PERIPH_BASE	cmsis_boot/stm32f0xx.h	884;"	d
 POL	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t POL;         \/*!< CRC polynomial register,                     Address offset: 0x14 *\/$/;"	m	struct:__anon16
@@ -2679,29 +2696,29 @@ PWR_CSR_SBF	cmsis_boot/stm32f0xx.h	3594;"	d
 PWR_CSR_VREFINTRDY	cmsis_boot/stm32f0xx.h	3596;"	d
 PWR_CSR_VREFINTRDYF	cmsis_boot/stm32f0xx.h	3608;"	d
 PWR_CSR_WUF	cmsis_boot/stm32f0xx.h	3593;"	d
-PWR_DS1	src/hard.h	129;"	d
+PWR_DS1	src/hard.h	148;"	d
 PWR_DS1	src/hard.h	60;"	d
-PWR_DS1_OFF	src/hard.h	131;"	d
+PWR_DS1_OFF	src/hard.h	150;"	d
 PWR_DS1_OFF	src/hard.h	62;"	d
-PWR_DS1_ON	src/hard.h	130;"	d
+PWR_DS1_ON	src/hard.h	149;"	d
 PWR_DS1_ON	src/hard.h	61;"	d
-PWR_DS2	src/hard.h	124;"	d
+PWR_DS2	src/hard.h	143;"	d
 PWR_DS2	src/hard.h	55;"	d
-PWR_DS2_OFF	src/hard.h	126;"	d
+PWR_DS2_OFF	src/hard.h	145;"	d
 PWR_DS2_OFF	src/hard.h	57;"	d
-PWR_DS2_ON	src/hard.h	125;"	d
+PWR_DS2_ON	src/hard.h	144;"	d
 PWR_DS2_ON	src/hard.h	56;"	d
-PWR_DS3	src/hard.h	109;"	d
+PWR_DS3	src/hard.h	128;"	d
 PWR_DS3	src/hard.h	40;"	d
-PWR_DS3_OFF	src/hard.h	111;"	d
+PWR_DS3_OFF	src/hard.h	130;"	d
 PWR_DS3_OFF	src/hard.h	42;"	d
-PWR_DS3_ON	src/hard.h	110;"	d
+PWR_DS3_ON	src/hard.h	129;"	d
 PWR_DS3_ON	src/hard.h	41;"	d
-PWR_DS4	src/hard.h	142;"	d
+PWR_DS4	src/hard.h	161;"	d
 PWR_DS4	src/hard.h	73;"	d
-PWR_DS4_OFF	src/hard.h	144;"	d
+PWR_DS4_OFF	src/hard.h	163;"	d
 PWR_DS4_OFF	src/hard.h	75;"	d
-PWR_DS4_ON	src/hard.h	143;"	d
+PWR_DS4_ON	src/hard.h	162;"	d
 PWR_DS4_ON	src/hard.h	74;"	d
 PWR_TypeDef	cmsis_boot/stm32f0xx.h	/^} PWR_TypeDef;$/;"	t	typeref:struct:__anon29
 PendSV_Handler	src/stm32f0xx_it.c	/^void PendSV_Handler(void)$/;"	f
@@ -3358,12 +3375,13 @@ RTSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RTSR;         \/*!<EXTI Rising tri
 RXCRCR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t RXCRCR;   \/*!< SPI Rx CRC register (not used in I2S mode),          Address offset: 0x14 *\/$/;"	m	struct:__anon32
 RXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RXDR;         \/*!< CEC Rx Data Register,                                       Address offset:0x0C *\/$/;"	m	struct:__anon14
 RXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RXDR;     \/*!< I2C Receive data register,         Address offset: 0x24 *\/$/;"	m	struct:__anon27
-RX_SERIE	src/hard.h	179;"	d
+RX_SERIE	src/hard.h	198;"	d
 ReadADC1	src/main.c	/^unsigned short ReadADC1 (unsigned char channel)$/;"	f
+ReadUsart2Buffer	src/uart.c	/^unsigned char ReadUsart2Buffer (unsigned char * bout, unsigned short max_len)$/;"	f
 Reset_Handler	cmsis_boot/startup/startup_stm32f0xx.s	/^Reset_Handler:$/;"	l
+S1_PIN	src/hard.h	117;"	d
 S1_PIN	src/hard.h	29;"	d
-S1_PIN	src/hard.h	98;"	d
-S2_PIN	src/hard.h	101;"	d
+S2_PIN	src/hard.h	120;"	d
 S2_PIN	src/hard.h	32;"	d
 SCB	cmsis_core/core_cm0.h	365;"	d
 SCB_AIRCR_ENDIANESS_Msk	cmsis_core/core_cm0.h	201;"	d
@@ -3429,7 +3447,7 @@ SCB_SHCSR_SVCALLPENDED_Msk	cmsis_core/core_cm0.h	228;"	d
 SCB_SHCSR_SVCALLPENDED_Pos	cmsis_core/core_cm0.h	227;"	d
 SCB_Type	cmsis_core/core_cm0.h	/^} SCB_Type;                                                $/;"	t	typeref:struct:__anon2
 SCR	cmsis_core/core_cm0.h	/^  __IO uint32_t SCR;                          \/*!< Offset: 0x10  System Control Register                               *\/$/;"	m	struct:__anon2
-SCROLL	src/noritake_lcd.h	57;"	d
+SCROLL	src/noritake_lcd.h	43;"	d
 SCS_BASE	cmsis_core/core_cm0.h	359;"	d
 SET	cmsis_boot/stm32f0xx.h	/^typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;$/;"	e	enum:__anon5
 SET_DISPLAY	src/comm.h	15;"	d
@@ -3523,7 +3541,7 @@ SR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SR;   \/*!< WWDG Status register,   
 SRAM_BASE	cmsis_boot/stm32f0xx.h	883;"	d
 SRC	Makefile	/^SRC  = .\/src\/main.c$/;"	m
 SSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SSR;        \/*!< RTC sub second register,                                  Address offset: 0x28 *\/$/;"	m	struct:__anon31
-STAND_BY	src/hard.h	174;"	d
+STAND_BY	src/hard.h	193;"	d
 STM32F030	cmsis_boot/stm32f0xx.h	69;"	d
 STM32F030	cmsis_boot/stm32f0xx.h	97;"	d
 STM32F031	cmsis_boot/stm32f0xx.h	87;"	d
@@ -3537,7 +3555,7 @@ SVC_Handler	src/stm32f0xx_it.c	/^void SVC_Handler(void)$/;"	f
 SVC_IRQn	cmsis_boot/stm32f0xx.h	/^  SVC_IRQn                    = -5,     \/*!< 11 Cortex-M0 SV Call Interrupt                          *\/$/;"	e	enum:IRQn
 SWIER	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SWIER;        \/*!<EXTI Software interrupt event register,                   Address offset: 0x10 *\/$/;"	m	struct:__anon22
 SWTRIGR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SWTRIGR;  \/*!< DAC software trigger register,                           Address offset: 0x04 *\/$/;"	m	struct:__anon18
-SYNC	src/noritake_lcd.h	12;"	d
+SYNC	src/noritake_lcd.h	14;"	d
 SYSCFG	cmsis_boot/stm32f0xx.h	974;"	d
 SYSCFG_BASE	cmsis_boot/stm32f0xx.h	911;"	d
 SYSCFG_CFGR1_ADC_DMA_RMP	cmsis_boot/stm32f0xx.h	4382;"	d
@@ -3571,6 +3589,9 @@ SYSCFG_CFGR2_PVD_LOCK	cmsis_boot/stm32f0xx.h	4586;"	d
 SYSCFG_CFGR2_SRAM_PARITY_LOCK	cmsis_boot/stm32f0xx.h	4585;"	d
 SYSCFG_CFGR2_SRAM_PE	cmsis_boot/stm32f0xx.h	4590;"	d
 SYSCFG_CFGR2_SRAM_PEF	cmsis_boot/stm32f0xx.h	4587;"	d
+SYSCFG_CLK	src/gpio.h	51;"	d
+SYSCFG_CLK_OFF	src/gpio.h	53;"	d
+SYSCFG_CLK_ON	src/gpio.h	52;"	d
 SYSCFG_EXTICR1_EXTI0	cmsis_boot/stm32f0xx.h	4406;"	d
 SYSCFG_EXTICR1_EXTI0_PA	cmsis_boot/stm32f0xx.h	4414;"	d
 SYSCFG_EXTICR1_EXTI0_PB	cmsis_boot/stm32f0xx.h	4415;"	d
@@ -3711,9 +3732,9 @@ TDHR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDHR; \/*!< CAN mailbox data high 
 TDLR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDLR; \/*!< CAN mailbox data low register *\/$/;"	m	struct:__anon10
 TDR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t TDR;    \/*!< USART Transmit Data register,             Address offset: 0x28 *\/$/;"	m	struct:__anon35
 TDTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDTR; \/*!< CAN mailbox data length control and time stamp register *\/$/;"	m	struct:__anon10
-TEMP110_CAL_ADDR	src/main.c	564;"	d	file:
-TEMP30_CAL_ADDR	src/main.c	565;"	d	file:
-TEMP_SENSE	src/hard.h	180;"	d
+TEMP110_CAL_ADDR	src/main.c	581;"	d	file:
+TEMP30_CAL_ADDR	src/main.c	582;"	d	file:
+TEMP_SENSE	src/hard.h	199;"	d
 TIM1	cmsis_boot/stm32f0xx.h	979;"	d
 TIM14	cmsis_boot/stm32f0xx.h	958;"	d
 TIM14_BASE	cmsis_boot/stm32f0xx.h	895;"	d
@@ -3978,17 +3999,17 @@ TS_IRQn	cmsis_boot/stm32f0xx.h	/^  TS_IRQn                     = 8,      \/*!< T
 TXCRCR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t TXCRCR;   \/*!< SPI Tx CRC register (not used in I2S mode),          Address offset: 0x18 *\/$/;"	m	struct:__anon32
 TXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TXDR;         \/*!< CEC Tx data register ,                                      Address offset:0x08 *\/$/;"	m	struct:__anon14
 TXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TXDR;     \/*!< I2C Transmit data register,        Address offset: 0x28 *\/$/;"	m	struct:__anon27
-TXD_IN	src/noritake_lcd.h	23;"	d
-TX_LCD	src/hard.h	175;"	d
-TX_LCD2	src/hard.h	176;"	d
-TX_LCD_OFF	src/noritake_lcd.h	24;"	d
-TX_LCD_ON	src/noritake_lcd.h	25;"	d
-TX_SERIE	src/hard.h	177;"	d
-TX_SERIE2	src/hard.h	178;"	d
-TX_SERIE2_NC	src/hard.h	182;"	d
-TX_SERIE_NC	src/hard.h	181;"	d
-TX_SERIE_OFF	src/noritake_lcd.h	26;"	d
-TX_SERIE_ON	src/noritake_lcd.h	27;"	d
+TXD_IN	src/hard.h	98;"	d
+TX_LCD	src/hard.h	194;"	d
+TX_LCD2	src/hard.h	195;"	d
+TX_LCD_OFF	src/hard.h	99;"	d
+TX_LCD_ON	src/hard.h	100;"	d
+TX_SERIE	src/hard.h	196;"	d
+TX_SERIE2	src/hard.h	197;"	d
+TX_SERIE2_NC	src/hard.h	201;"	d
+TX_SERIE_NC	src/hard.h	200;"	d
+TX_SERIE_OFF	src/hard.h	101;"	d
+TX_SERIE_ON	src/hard.h	102;"	d
 Timer_1_Init	src/stm32f0x_tim.h	47;"	d
 Timer_2_Init	src/stm32f0x_tim.h	48;"	d
 Timer_3_Init	src/stm32f0x_tim.h	49;"	d
@@ -4000,20 +4021,35 @@ UDEFS	Makefile	/^UDEFS =$/;"	m
 UINCDIR	Makefile	/^UINCDIR = $(DEVDIR) \\$/;"	m
 ULIBDIR	Makefile	/^ULIBDIR =$/;"	m
 ULIBS	Makefile	/^ULIBS =$/;"	m
-US	src/noritake_lcd.h	51;"	d
+US	src/noritake_lcd.h	37;"	d
 USART1	cmsis_boot/stm32f0xx.h	981;"	d
+USART1Config	src/uart.c	/^void USART1Config(void)$/;"	f
+USART1Send	src/uart.c	/^unsigned char USART1Send(char * send)$/;"	f
 USART1_BASE	cmsis_boot/stm32f0xx.h	918;"	d
-USART1_CLK	src/stm32f0x_uart.h	23;"	d
-USART1_CLK_OFF	src/stm32f0x_uart.h	25;"	d
-USART1_CLK_ON	src/stm32f0x_uart.h	24;"	d
+USART1_CLK	src/uart.h	28;"	d
+USART1_CLK_OFF	src/uart.h	30;"	d
+USART1_CLK_ON	src/uart.h	29;"	d
+USART1_IRQHandler	src/uart.c	/^void USART1_IRQHandler(void)$/;"	f
 USART1_IRQn	cmsis_boot/stm32f0xx.h	/^  USART1_IRQn                 = 27,     \/*!< USART1 Interrupt                                        *\/$/;"	e	enum:IRQn
+USART1_RX_DISA	src/uart.h	41;"	d
+USART1_RX_ENA	src/uart.h	42;"	d
 USART2	cmsis_boot/stm32f0xx.h	963;"	d
+USART2Config	src/uart.c	/^void USART2Config(void)$/;"	f
 USART2_BASE	cmsis_boot/stm32f0xx.h	900;"	d
+USART2_CLK	src/uart.h	32;"	d
+USART2_CLK_OFF	src/uart.h	34;"	d
+USART2_CLK_ON	src/uart.h	33;"	d
+USART2_IRQHandler	src/uart.c	/^void USART2_IRQHandler(void)$/;"	f
 USART2_IRQn	cmsis_boot/stm32f0xx.h	/^  USART2_IRQn                 = 28,     \/*!< USART2 Interrupt                                        *\/$/;"	e	enum:IRQn
+USART2_RX_DISA	src/uart.h	45;"	d
+USART2_RX_ENA	src/uart.h	46;"	d
 USART3	cmsis_boot/stm32f0xx.h	964;"	d
 USART3_BASE	cmsis_boot/stm32f0xx.h	901;"	d
 USART4	cmsis_boot/stm32f0xx.h	965;"	d
 USART4_BASE	cmsis_boot/stm32f0xx.h	902;"	d
+USART_115200	src/uart.h	37;"	d
+USART_250000	src/uart.h	38;"	d
+USART_9600	src/uart.h	36;"	d
 USART_BRR_DIV_FRACTION	cmsis_boot/stm32f0xx.h	4978;"	d
 USART_BRR_DIV_MANTISSA	cmsis_boot/stm32f0xx.h	4979;"	d
 USART_CR1_CMIE	cmsis_boot/stm32f0xx.h	4910;"	d
@@ -4092,7 +4128,6 @@ USART_CR3_WUFIE	cmsis_boot/stm32f0xx.h	4975;"	d
 USART_CR3_WUS	cmsis_boot/stm32f0xx.h	4972;"	d
 USART_CR3_WUS_0	cmsis_boot/stm32f0xx.h	4973;"	d
 USART_CR3_WUS_1	cmsis_boot/stm32f0xx.h	4974;"	d
-USART_Config	src/stm32f0x_uart.c	/^void USART_Config(void)$/;"	f
 USART_GTPR_GT	cmsis_boot/stm32f0xx.h	4983;"	d
 USART_GTPR_PSC	cmsis_boot/stm32f0xx.h	4982;"	d
 USART_ICR_CMCF	cmsis_boot/stm32f0xx.h	5032;"	d
@@ -4139,34 +4174,18 @@ USART_RTOR_BLEN	cmsis_boot/stm32f0xx.h	4988;"	d
 USART_RTOR_RTO	cmsis_boot/stm32f0xx.h	4987;"	d
 USART_TDR_TDR	cmsis_boot/stm32f0xx.h	5039;"	d
 USART_TypeDef	cmsis_boot/stm32f0xx.h	/^} USART_TypeDef;$/;"	t	typeref:struct:__anon35
-USARTx	src/stm32f0x_uart.h	28;"	d
-USARTx_APBPERIPHCLOCK	src/stm32f0x_uart.h	30;"	d
-USARTx_CLK	src/stm32f0x_uart.h	29;"	d
-USARTx_IRQHandler	src/stm32f0x_uart.c	/^void USARTx_IRQHandler(void)$/;"	f
-USARTx_IRQHandler	src/stm32f0x_uart.h	32;"	d
-USARTx_IRQn	src/stm32f0x_uart.h	31;"	d
-USARTx_RX_AF	src/stm32f0x_uart.h	44;"	d
-USARTx_RX_DISA	src/stm32f0x_uart.h	46;"	d
-USARTx_RX_ENA	src/stm32f0x_uart.h	47;"	d
-USARTx_RX_GPIO_CLK	src/stm32f0x_uart.h	42;"	d
-USARTx_RX_GPIO_PORT	src/stm32f0x_uart.h	41;"	d
-USARTx_RX_PIN	src/stm32f0x_uart.h	40;"	d
-USARTx_RX_SOURCE	src/stm32f0x_uart.h	43;"	d
-USARTx_Send	src/stm32f0x_uart.c	/^unsigned char USARTx_Send(char * send)$/;"	f
-USARTx_TX_AF	src/stm32f0x_uart.h	38;"	d
-USARTx_TX_GPIO_CLK	src/stm32f0x_uart.h	36;"	d
-USARTx_TX_GPIO_PORT	src/stm32f0x_uart.h	35;"	d
-USARTx_TX_PIN	src/stm32f0x_uart.h	34;"	d
-USARTx_TX_SOURCE	src/stm32f0x_uart.h	37;"	d
-USARTx_receive	src/stm32f0x_uart.c	/^void USARTx_receive (void)$/;"	f
 USER	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t USER;         \/*!< FLASH option byte user options,                Address offset: 0x02 *\/$/;"	m	struct:__anon24
-Usart_Time_1ms	src/stm32f0x_uart.c	/^void Usart_Time_1ms (void)$/;"	f
+USE_USART1	src/uart.h	25;"	d
+Usart2Send	src/uart.c	/^void Usart2Send (char * send)$/;"	f
+Usart2SendSingle	src/uart.c	/^void Usart2SendSingle(unsigned char tosend)$/;"	f
+Usart2SendUnsigned	src/uart.c	/^void Usart2SendUnsigned(unsigned char * send, unsigned char size)$/;"	f
 VAL	cmsis_core/core_cm0.h	/^  __IO uint32_t VAL;                          \/*!< Offset: 0x08  SysTick Current Value Register      *\/$/;"	m	struct:__anon3
-VDD_APPLI	src/main.c	567;"	d	file:
-VDD_CALIB	src/main.c	566;"	d	file:
-VER_2_0	src/hard.h	15;"	d
-VSCROLL	src/noritake_lcd.h	54;"	d
+VDD_APPLI	src/main.c	584;"	d	file:
+VDD_CALIB	src/main.c	583;"	d	file:
+VER_1_1	src/hard.h	16;"	d
+VSCROLL	src/noritake_lcd.h	40;"	d
 WINR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t WINR; \/*!< IWDG Window register,    Address offset: 0x10 *\/$/;"	m	struct:__anon28
+WITH_EXTI	src/gpio.h	29;"	d
 WORKING	src/hard.h	/^	WORKING = 1,$/;"	e	enum:end_states
 WPR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t WPR;        \/*!< RTC write protection register,                            Address offset: 0x24 *\/$/;"	m	struct:__anon31
 WRP0	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t WRP0;         \/*!< FLASH option byte write protection 0,          Address offset: 0x08 *\/$/;"	m	struct:__anon24
@@ -4236,7 +4255,6 @@ __INLINE	cmsis_core/core_cm0.h	391;"	d
 __IO	cmsis_core/core_cm0.h	81;"	d
 __ISB	cmsis_core/core_cm0.h	/^static __INLINE void __ISB()                      { __ASM volatile ("isb"); }$/;"	f
 __ISB	cmsis_core/core_cm0.h	408;"	d
-__MAIN_H	src/main.h	18;"	d
 __MPU_PRESENT	cmsis_boot/stm32f0xx.h	194;"	d
 __NOP	cmsis_core/core_cm0.h	/^static __INLINE void __NOP()                      { __ASM volatile ("nop"); }$/;"	f
 __NOP	cmsis_core/core_cm0.h	404;"	d
@@ -4261,9 +4279,10 @@ __STM32F0XX_STDPERIPH_VERSION_MAIN	cmsis_boot/stm32f0xx.h	172;"	d
 __STM32F0XX_STDPERIPH_VERSION_RC	cmsis_boot/stm32f0xx.h	175;"	d
 __STM32F0XX_STDPERIPH_VERSION_SUB1	cmsis_boot/stm32f0xx.h	173;"	d
 __STM32F0XX_STDPERIPH_VERSION_SUB2	cmsis_boot/stm32f0xx.h	174;"	d
+__STM32F0X_GPIO_H	src/gpio.h	18;"	d
 __STM32F0X_GPIO_H	src/stm32f0x_gpio.h	18;"	d
 __STM32F0X_TIM_H	src/stm32f0x_tim.h	18;"	d
-__STM32F0X_UART_H	src/stm32f0x_uart.h	18;"	d
+__STM32F0X_UART_H	src/uart.h	18;"	d
 __SYSTEM_STM32F0XX_H	cmsis_boot/system_stm32f0xx.h	40;"	d
 __Vendor_SysTickConfig	cmsis_boot/stm32f0xx.h	196;"	d
 __WFE	cmsis_core/core_cm0.h	/^static __INLINE  void __WFE()                     { __ASM ("wfe"); }$/;"	f
@@ -4314,12 +4333,10 @@ assemblersources	Makefile	/^assemblersources = $(ASRC)$/;"	m
 assert_param	cmsis_boot/stm32f0xx_conf.h	71;"	d
 assert_param	cmsis_boot/stm32f0xx_conf.h	75;"	d
 assobjects	Makefile	/^assobjects = $(assemblersources:.s=.o)$/;"	m
-buffrx	src/stm32f0x_uart.c	/^unsigned char buffrx[BUFFRX_DIM];$/;"	v
-buffrx_cpy	src/stm32f0x_uart.c	/^unsigned char buffrx_cpy[BUFFRX_DIM];$/;"	v
+buffrx	src/uart.c	/^unsigned char buffrx[BUFFRX_DIM];$/;"	v
+buffrx_cpy	src/uart.c	/^unsigned char buffrx_cpy[BUFFRX_DIM];$/;"	v
 buffrx_ready	src/main.c	/^volatile unsigned char buffrx_ready = 0;$/;"	v
-buffrx_timeout	src/stm32f0x_uart.c	/^unsigned char buffrx_timeout = 0;$/;"	v
-bufftx	src/stm32f0x_uart.c	/^unsigned char bufftx[BUFFTX_DIM];$/;"	v
-bufftx_timeout	src/stm32f0x_uart.c	/^unsigned char bufftx_timeout = 0;$/;"	v
+bufftx	src/uart.c	/^unsigned char bufftx[BUFFTX_DIM];$/;"	v
 command	src/noritake_lcd.c	/^unsigned char command [10];$/;"	v
 end_states	src/hard.h	/^enum end_states$/;"	g
 errno	cmsis_boot/syscalls/syscalls.c	11;"	d	file:
@@ -4329,9 +4346,15 @@ main	src/main.c	/^int main(void)$/;"	f
 objects	Makefile	/^objects = $(sources:.c=.o)$/;"	m
 pCmd	src/comm.c	/^char pCmd [20];$/;"	v
 pbuffrx	src/main.c	/^volatile unsigned char *pbuffrx;$/;"	v
-pbuffrx_cpy	src/stm32f0x_uart.c	/^unsigned char *pbuffrx_cpy;$/;"	v
-pbufftx	src/stm32f0x_uart.c	/^unsigned char * pbufftx;$/;"	v
-pbufftx2	src/stm32f0x_uart.c	/^unsigned char * pbufftx2;$/;"	v
+pbuffrx_cpy	src/uart.c	/^unsigned char *pbuffrx_cpy;$/;"	v
+pbufftx	src/uart.c	/^unsigned char * pbufftx;$/;"	v
+pbufftx2	src/uart.c	/^unsigned char * pbufftx2;$/;"	v
+prx1	src/uart.c	/^volatile unsigned char * prx1;$/;"	v
+prx2	src/uart.c	/^volatile unsigned char * prx2;$/;"	v
+ptx1	src/uart.c	/^volatile unsigned char * ptx1;$/;"	v
+ptx1_pckt_index	src/uart.c	/^volatile unsigned char * ptx1_pckt_index;$/;"	v
+ptx2	src/uart.c	/^volatile unsigned char * ptx2;$/;"	v
+ptx2_pckt_index	src/uart.c	/^volatile unsigned char * ptx2_pckt_index;$/;"	v
 sFIFOMailBox	cmsis_boot/stm32f0xx.h	/^  CAN_FIFOMailBox_TypeDef    sFIFOMailBox[2];     \/*!< CAN FIFO MailBox,                    Address offset: 0x1B0 - 0x1CC *\/$/;"	m	struct:__anon13
 sFilterRegister	cmsis_boot/stm32f0xx.h	/^  CAN_FilterRegister_TypeDef sFilterRegister[28]; \/*!< CAN Filter Register,                 Address offset: 0x240-0x31C   *\/$/;"	m	struct:__anon13
 sTxMailBox	cmsis_boot/stm32f0xx.h	/^  CAN_TxMailBox_TypeDef      sTxMailBox[3];       \/*!< CAN Tx MailBox,                      Address offset: 0x180 - 0x1AC *\/$/;"	m	struct:__anon13

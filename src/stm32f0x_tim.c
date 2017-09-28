@@ -14,7 +14,9 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "stm32f0xx.h"
+#include "stm32f0x_tim.h"
+#include "hard.h"
 
 //--- VARIABLES EXTERNAS ---//
 extern volatile unsigned char timer_1seg;
@@ -43,7 +45,7 @@ void Wait_ms (unsigned short wait)
 void TIM3_IRQHandler (void)	//1 ms
 {
 
-	Usart_Time_1ms ();
+	//Usart_Time_1ms ();
 
 	if (timer_1seg)
 	{
@@ -74,8 +76,6 @@ void TIM3_IRQHandler (void)	//1 ms
 void TIM_3_Init (void)
 {
 
-	NVIC_InitTypeDef NVIC_InitStructure;
-
 	if (!RCC_TIM3_CLK)
 		RCC_TIM3_CLK_ON;
 
@@ -89,10 +89,8 @@ void TIM_3_Init (void)
 	TIM3->DIER |= TIM_DIER_UIE;
 	TIM3->CR1 |= TIM_CR1_CEN;
 
-	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 5;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
+	NVIC_EnableIRQ(TIM3_IRQn);
+	NVIC_SetPriority(TIM3_IRQn, 6);
 }
 
 void TIM14_IRQHandler (void)	//100uS
@@ -107,8 +105,6 @@ void TIM14_IRQHandler (void)	//100uS
 void TIM_14_Init (void)
 {
 
-	NVIC_InitTypeDef NVIC_InitStructure;
-
 	if (!RCC_TIM14_CLK)
 		RCC_TIM14_CLK_ON;
 
@@ -122,10 +118,8 @@ void TIM_14_Init (void)
 	TIM14->DIER |= TIM_DIER_UIE;
 	TIM14->CR1 |= TIM_CR1_CEN;
 
-	NVIC_InitStructure.NVIC_IRQChannel = TIM14_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 5;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
+	NVIC_EnableIRQ(TIM14_IRQn);
+	NVIC_SetPriority(TIM14_IRQn, 6);
 }
 
 void TIM16_IRQHandler (void)	//100uS
@@ -140,8 +134,6 @@ void TIM16_IRQHandler (void)	//100uS
 void TIM_16_Init (void)
 {
 
-	NVIC_InitTypeDef NVIC_InitStructure;
-
 	if (!RCC_TIM16_CLK)
 		RCC_TIM16_CLK_ON;
 
@@ -155,19 +147,12 @@ void TIM_16_Init (void)
 	TIM16->DIER |= TIM_DIER_UIE;
 	TIM16->CR1 |= TIM_CR1_CEN;
 
-	NVIC_InitStructure.NVIC_IRQChannel = TIM16_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 5;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
+	NVIC_EnableIRQ(TIM16_IRQn);
+	NVIC_SetPriority(TIM16_IRQn, 6);
 }
 
 void TIM17_IRQHandler (void)	//100uS
 {
-
-	if (GPIOA_PIN0_OUT)
-		GPIOA_PIN0_OFF;
-	else
-		GPIOA_PIN0_ON;
 
 	if (TIM17->SR & 0x01)
 		//bajar flag
@@ -177,8 +162,6 @@ void TIM17_IRQHandler (void)	//100uS
 
 void TIM_17_Init (void)
 {
-
-	NVIC_InitTypeDef NVIC_InitStructure;
 
 	if (!RCC_TIM17_CLK)
 		RCC_TIM17_CLK_ON;
@@ -193,12 +176,8 @@ void TIM_17_Init (void)
 	TIM17->DIER |= TIM_DIER_UIE;
 	TIM17->CR1 |= TIM_CR1_CEN;
 
-	NVIC_InitStructure.NVIC_IRQChannel = TIM17_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 5;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
+	NVIC_EnableIRQ(TIM17_IRQn);
+	NVIC_SetPriority(TIM17_IRQn, 6);
 }
 
 //--- end of file ---//
-
-

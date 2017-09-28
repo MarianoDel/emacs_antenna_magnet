@@ -1,10 +1,15 @@
 #include "stm32f0xx.h"
 #include "hard.h"
-#include "main.h"
+#include "gpio.h"
+#include "noritake_lcd.h"
+#include "comm.h"
+#include "uart.h"
+//#include "main.h"
 #include "stm32f0xx_adc.h"
 #include "stdio.h"
 #include "string.h"
 #include "adc.h"
+#include "stm32f0x_tim.h"
 
 //ANTENA ELEGIDA
 //#define ANTENA0		//toroidal diametro grande
@@ -175,7 +180,7 @@ int main(void)
 	//Timer_4_Init();
 
 	//UART configuration.
-	USART_Config();
+	USART1Config();
 
 	//TODO:
 	//ACTIVAR SYSTICK TIMER
@@ -203,9 +208,9 @@ int main(void)
 
 	//ADC configuration.
 	if (ADC_Conf() == 0)
-		USARTx_Send("\r\nERROR DE CALIBRACION...");
+		USART1Send("\r\nERROR DE CALIBRACION...");
 	else
-		USARTx_Send("\r\nCALIBRACION de ADC OK...");
+		USART1Send("\r\nCALIBRACION de ADC OK...");
 
 	//Activo sensor de temp
 	ADC_TempSensorCmd(ENABLE);
@@ -213,16 +218,27 @@ int main(void)
 	ts_cal1 = *((uint16_t*)0x1FFFF7B8);
 	ts_cal2 = *((uint16_t*)0x1FFFF7C2);
 
-	USARTx_Send("\r\nts_cal1: ");
+	USART1Send("\r\nts_cal1: ");
 	memset(str1, 0, sizeof(str1));
     sprintf(str1, "%d", ts_cal1);
-    USARTx_Send(str1);
-    USARTx_Send("\r\nts_cal2: ");
+    USART1Send(str1);
+    USART1Send("\r\nts_cal2: ");
 	memset(str1, 0, sizeof(str1));
     sprintf(str1, "%d", ts_cal2);
-    USARTx_Send(str1);
+    USART1Send(str1);
     dx = ts_cal1 - ts_cal2;
     Wait_ms(2000);
+
+	//  while (1)
+	//  {
+	// 		 if (LED_COMM)
+	// 			LED_COMM_OFF;
+	// 		else
+	// 			LED_COMM_ON;
+	 //
+	// 			Wait_ms(300);
+	 //
+	//  }
 
 
     //--- PROGRAMA PRUEBA PUERTO SERIE Y TEMP ---//
@@ -290,6 +306,7 @@ int main(void)
     //--- FIN PROGRAMA STRING COMUNICACION ONE-WIRE ---//
 
 
+
 	//--- Main loop ---//
 	while(1)
 	{
@@ -303,7 +320,7 @@ int main(void)
 				{
 					LED_COMM_ON;
 					state = TX_SERIE_NC;
-					USARTx_Send((char *)s_antena);
+					USART1Send((char *)s_antena);
 				}
 
 				if (buffrx_ready)
@@ -323,7 +340,7 @@ int main(void)
 					answer = 0;
 					LED_COMM_OFF;
 					state = TX_SERIE;
-					USARTx_Send((char *)s_ok);
+					USART1Send((char *)s_ok);
 				}
 
 				if (answer == GET_PARAMS)
@@ -334,7 +351,7 @@ int main(void)
 					state = TX_SERIE;
 					//apago RX
 
-					USARTx_Send((char *)s_antena);
+					USART1Send((char *)s_antena);
 				}
 
 				if (answer == GET_TEMP)
@@ -356,7 +373,7 @@ int main(void)
 
 				    memset(str1, 0, sizeof(str1));
 				    sprintf(str1, "temp,%03d.00\r\n", temp);
-					USARTx_Send(str1);
+					USART1Send(str1);
 				}
 
 				if (buffrx_ready)
@@ -546,7 +563,7 @@ unsigned short ADC_Conf (void)
 
 unsigned short ReadADC1 (unsigned char channel)
 {
-	GPIOA_PIN4_ON;
+//	GPIOA_PIN4_ON;
 	// Set channel and sample time
 	//ADC_ChannelConfig(ADC1, channel, ADC_SampleTime_7_5Cycles);
 	ADC_ChannelConfig(ADC1, ADC_Channel_16, ADC_SampleTime_239_5Cycles);
@@ -556,7 +573,7 @@ unsigned short ReadADC1 (unsigned char channel)
 	// Wait until conversion completion
 	while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
 	// Get the conversion value
-	GPIOA_PIN4_OFF;	//tarda 20us en convertir
+//	GPIOA_PIN4_OFF;	//tarda 20us en convertir
 	return ADC_GetConversionValue(ADC1);
 }
 

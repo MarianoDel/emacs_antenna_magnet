@@ -12,8 +12,8 @@
 
 //-- Defines For Configuration -------------------
 //---- Configuration for Hardware Versions -------
-#define VER_2_0		//juego de 2 placas chicas
-//#define VER_1_1		//placa rectangular larga
+//#define VER_2_0		//juego de 2 placas chicas
+#define VER_1_1		//placa rectangular larga
 
 //-- End Of Defines For Configuration ---------------
 
@@ -87,6 +87,25 @@
 #endif
 
 #ifdef VER_1_1
+
+//pines de enable para la serial y el lcd
+#define ENA_SERIAL_LCD GPIOA->BSRR = 0x00000001
+#define DISA_SERIAL_LCD GPIOA->BSRR = 0x00010000
+
+#define ENA_SERIAL GPIOA->BSRR = 0x00000002
+#define DISA_SERIAL GPIOA->BSRR = 0x00020000
+
+#define TXD_IN				((GPIOA->ODR & 0x0080) != 0)
+#define TX_LCD_OFF		GPIOA->BSRR = 0x00400000
+#define TX_LCD_ON			GPIOA->BSRR = 0x00000040
+#define TX_SERIE_OFF		GPIOA->BSRR = 0x00200000
+#define TX_SERIE_ON		GPIOA->BSRR = 0x00000020
+
+//GPIOA pin4
+#define LED_COMM			((GPIOA->ODR & 0x0010) != 0)
+#define LED_COMM_ON		GPIOA->BSRR = 0x00000010
+#define LED_COMM_OFF		GPIOA->BSRR = 0x00100000
+
 //GPIOA pin0	adc LM335 input
 
 //GPIOA pin1
