@@ -42,6 +42,7 @@ volatile unsigned short timer_standby = 0;
 volatile unsigned short timer_led_comm = 0;
 volatile unsigned char buffrx_ready = 0;
 volatile unsigned char *pbuffrx;
+volatile unsigned char *pbuffrx_cpy;
 
 const char s_ok [] = {"ok\r\n"};
 
@@ -205,11 +206,6 @@ int main(void)
 	 }
 	 */
 	 //FIN PRUEBA DE SYSTICK
-	 while (1)
-	 {
-		USART1Send("\r\n");
-		Wait_ms(200);
-	 }
 
 	//ADC configuration.
 	if (ADC_Conf() == 0)
@@ -310,7 +306,21 @@ int main(void)
 	*/
     //--- FIN PROGRAMA STRING COMUNICACION ONE-WIRE ---//
 
+	 while (1) {
+	 	/* code */
+		if (!timer_standby)
+		{
+			timer_standby = 6000;
+			USART1Send((char *)s_antena);
+		}
 
+
+		if (TXD_IN)
+			TX_SERIE_OFF;
+		else
+			TX_SERIE_ON;
+
+	 }
 
 	//--- Main loop ---//
 	while(1)
@@ -488,7 +498,7 @@ int main(void)
 				//reviso que me llego, igual paso al estado conectado
 				//si entiendo el mensaje
 				answer = 0;
-				a = InterpretarMsg ((char *)pbuffrx);
+				a = InterpretarMsg ((char *)pbuffrx_cpy);
 
 				switch (a)
 				{

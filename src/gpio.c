@@ -70,8 +70,8 @@ void GPIO_Config (void)
 
 #ifdef VER_1_1
 	temp = GPIOA->MODER;
-	temp &= 0xFFFFC0FF;	//PIN 4 5 y 6 out, 7 in
-	temp |= 0x00001500; //Cada 2 bits un pin.
+	temp &= 0xFFFFC00F;	//PA2 PA3 alternative PIN 4 5 y 6 out, 7 in
+	temp |= 0x000015A0; //Cada 2 bits un pin.
 	//temp &= 0xFFFFFCFC;	//PIN0, 1, 4 y 5 out
 	//temp |= 0x00000101; //Cada 2 bits un pin.
 	GPIOA->MODER = temp;

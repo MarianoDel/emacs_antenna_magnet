@@ -35,6 +35,7 @@
 #ifdef USE_USART1
 extern volatile unsigned char buffrx_ready;
 extern volatile unsigned char *pbuffrx;
+extern volatile unsigned char *pbuffrx_cpy;
 #endif
 
 #ifdef USE_USART2
@@ -55,7 +56,7 @@ volatile unsigned char * prx1;
 //Reception buffer.
 unsigned char buffrx[BUFFRX_DIM];
 unsigned char buffrx_cpy[BUFFRX_DIM];
-unsigned char *pbuffrx_cpy;
+
 
 //Transmission buffer.
 unsigned char bufftx[BUFFTX_DIM];
@@ -95,6 +96,7 @@ void USART1Config(void)
 	//seteo punteros
 	pbuffrx = buffrx;
 	pbufftx = bufftx;
+	pbufftx2 = bufftx;
 
 	NVIC_EnableIRQ(USART1_IRQn);
 	NVIC_SetPriority(USART1_IRQn, 5);
@@ -151,26 +153,13 @@ void USART1_IRQHandler(void)
 	/* USART in mode Transmitter -------------------------------------------------*/
 	if (USART1->CR1 & USART_CR1_TXEIE)
 	{
-		if (*pbufftx2 != 0)
+		if (pbufftx2 < pbufftx)
 		{
-			//GPIOA_PIN0_ON;
 			USART1->TDR = *pbufftx2 & 0x0FF;
-
-			if (pbufftx2 < &bufftx[BUFFTX_DIM])
-			{
-				pbufftx2++;
-
-				if (pbuffrx == &buffrx[BUFFRX_DIM])
-					pbuffrx = buffrx;
-			}
-			else
-				pbufftx2 = bufftx;
-
+			pbufftx2++;
 		}
 		else
 		{
-			//GPIOA_PIN0_OFF;
-
 			USART1->CR1 &= ~USART_CR1_TXEIE;
 
 			pbufftx2 = bufftx;
