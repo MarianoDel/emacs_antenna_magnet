@@ -20,7 +20,7 @@
 //#define ANTENA4	//cilindrica grande
 //#define ANTENA5	//cilindrica muy chica OJOS
 //#define ANTENA6	//cilindrica vieja de madera
-//#define ANTENA7 //pencil tunel
+// #define ANTENA7 //pencil tunel
 //#define ANTENA8 //pencil plato doble
 //#define ANTENAA1	//Ernesto viejas
 //#define ANTENAA2	//Ernesto viejas
@@ -34,7 +34,8 @@
 //#define ANTENAB0	//antenas Ernesto tunel 9" dia
 //#define ANTENAB1	//antenas Ernesto tunel 7" dia
 //#define ANTENAB2	//antenas Ernesto tunel 6" dia
-#define ANTENAB3	//antenas Ernesto tunel 6" dia
+// #define ANTENAB3	//antenas Ernesto tunel 6" dia
+#define ANTENAB4	//antenas plato companiera pencil
 
 //--- VARIABLES EXTERNAS ---//
 volatile unsigned char timer_1seg = 0;
@@ -137,6 +138,11 @@ const char s_antena [] = { "anta,003.50,023.25,003.00,065.00\r\n" };
 
 #ifdef ANTENAB3 //antenas Ernesto tunel 08-08-17
 const char s_antena [] = { "anta,002.20,021.71,003.00,065.00\r\n" };
+#endif
+
+#ifdef ANTENAB4 //antenas plana companiera de pencil 26-04-18
+// const char s_antena [] = { "anta,031.10,220.00,001.10,065.00\r\n" };
+const char s_antena [] = { "anta,031.10,150.00,001.10,065.00\r\n" };    //lo baje para que me deje salr cuadrada en 60Hz
 #endif
 
 static __IO uint32_t TimingDelay;

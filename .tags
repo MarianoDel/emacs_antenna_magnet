@@ -111,7 +111,7 @@ AHBRSTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t AHBRSTR;    \/*!< RCC AHB perip
 AIRCR	cmsis_core/core_cm0.h	/^  __IO uint32_t AIRCR;                        \/*!< Offset: 0x0C  Application Interrupt \/ Reset Control Register        *\/$/;"	m	struct:__anon2
 ALRMAR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ALRMAR;     \/*!< RTC alarm A register,                                     Address offset: 0x1C *\/$/;"	m	struct:__anon31
 ALRMASSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ALRMASSR;   \/*!< RTC alarm A sub second register,                          Address offset: 0x44 *\/$/;"	m	struct:__anon31
-ANTENAB3	src/main.c	37;"	d	file:
+ANTENA6	src/main.c	22;"	d	file:
 APB1ENR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t APB1ENR;    \/*!< RCC APB1 peripheral clock enable register,                   Address offset: 0x1C *\/$/;"	m	struct:__anon30
 APB1FZ	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t APB1FZ;       \/*!< Debug MCU APB1 freeze register,              Address offset: 0x08 *\/$/;"	m	struct:__anon19
 APB1RSTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t APB1RSTR;   \/*!< RCC APB1 peripheral reset register,                          Address offset: 0x10 *\/$/;"	m	struct:__anon30
@@ -138,8 +138,6 @@ BRR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t BRR;    \/*!< USART Baud rate regis
 BS	src/noritake_lcd.h	30;"	d
 BSRR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t BSRR;         \/*!< GPIO port bit set\/reset registerBSRR,                     Address offset: 0x18 *\/$/;"	m	struct:__anon25
 BTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t              BTR;                 \/*!< CAN bit timing register,             Address offset: 0x1C          *\/$/;"	m	struct:__anon13
-BUFFRX_DIM	src/uart.c	29;"	d	file:
-BUFFTX_DIM	src/uart.c	30;"	d	file:
 CAL	cmsis_boot/stm32f0xx.h	745;"	d
 CALIB	cmsis_core/core_cm0.h	/^  __I  uint32_t CALIB;                        \/*!< Offset: 0x0C  SysTick Calibration Register        *\/$/;"	m	struct:__anon3
 CALR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t CALR;       \/*!< RTC calibration register,                                 Address offset: 0x3C *\/$/;"	m	struct:__anon31
@@ -3268,6 +3266,7 @@ RXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RXDR;         \/*!< CEC Rx Data Re
 RXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RXDR;     \/*!< I2C Receive data register,         Address offset: 0x24 *\/$/;"	m	struct:__anon27
 RX_SERIE	src/hard.h	154;"	d
 ReadADC1	src/main.c	/^unsigned short ReadADC1 (unsigned char channel)$/;"	f
+ReadUsart1Buffer	src/uart.c	/^unsigned char ReadUsart1Buffer (unsigned char * bout, unsigned short max_len)$/;"	f
 ReadUsart2Buffer	src/uart.c	/^unsigned char ReadUsart2Buffer (unsigned char * bout, unsigned short max_len)$/;"	f
 Reset_Handler	cmsis_boot/startup/startup_stm32f0xx.s	/^Reset_Handler:$/;"	l
 S1_PIN	src/hard.h	73;"	d
@@ -3343,6 +3342,8 @@ SET_DISPLAY	src/comm.h	15;"	d
 SHCSR	cmsis_core/core_cm0.h	/^  __IO uint32_t SHCSR;                        \/*!< Offset: 0x24  System Handler Control and State Register             *\/$/;"	m	struct:__anon2
 SHIFTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SHIFTR;     \/*!< RTC shift control register,                               Address offset: 0x2C *\/$/;"	m	struct:__anon31
 SHP	cmsis_core/core_cm0.h	/^  __IO uint32_t SHP[2];                       \/*!< Offset: 0x1C  System Handlers Priority Registers. [0] is RESERVED   *\/$/;"	m	struct:__anon2
+SIZEOF_RXDATA	src/uart.c	27;"	d	file:
+SIZEOF_TXDATA	src/uart.c	28;"	d	file:
 SMCR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t SMCR;            \/*!< TIM slave Mode Control register,             Address offset: 0x08 *\/$/;"	m	struct:__anon33
 SMPR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SMPR;         \/*!< ADC Sampling time register,                                 Address offset:0x14 *\/$/;"	m	struct:__anon8
 SPI1	cmsis_boot/stm32f0xx.h	980;"	d
@@ -3913,7 +3914,6 @@ ULIBS	Makefile	/^ULIBS =$/;"	m
 US	src/noritake_lcd.h	37;"	d
 USART1	cmsis_boot/stm32f0xx.h	981;"	d
 USART1Config	src/uart.c	/^void USART1Config(void)$/;"	f
-USART1Send	src/uart.c	/^unsigned char USART1Send(char * send)$/;"	f
 USART1_BASE	cmsis_boot/stm32f0xx.h	918;"	d
 USART1_CLK	src/uart.h	28;"	d
 USART1_CLK_OFF	src/uart.h	30;"	d
@@ -4065,8 +4065,9 @@ USART_TDR_TDR	cmsis_boot/stm32f0xx.h	5039;"	d
 USART_TypeDef	cmsis_boot/stm32f0xx.h	/^} USART_TypeDef;$/;"	t	typeref:struct:__anon35
 USER	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t USER;         \/*!< FLASH option byte user options,                Address offset: 0x02 *\/$/;"	m	struct:__anon24
 USE_USART1	src/uart.h	25;"	d
-Usart1RxDisable	src/uart.c	/^void Usart1RxDisable (void)$/;"	f
-Usart1RxEnable	src/uart.c	/^void Usart1RxEnable (void)$/;"	f
+Usart1Send	src/uart.c	/^void Usart1Send (char * send)$/;"	f
+Usart1SendSingle	src/uart.c	/^void Usart1SendSingle(unsigned char tosend)$/;"	f
+Usart1SendUnsigned	src/uart.c	/^void Usart1SendUnsigned(unsigned char * send, unsigned char size)$/;"	f
 Usart2Send	src/uart.c	/^void Usart2Send (char * send)$/;"	f
 Usart2SendSingle	src/uart.c	/^void Usart2SendSingle(unsigned char tosend)$/;"	f
 Usart2SendUnsigned	src/uart.c	/^void Usart2SendUnsigned(unsigned char * send, unsigned char size)$/;"	f
@@ -4223,10 +4224,7 @@ assemblersources	Makefile	/^assemblersources = $(ASRC)$/;"	m
 assert_param	cmsis_boot/stm32f0xx_conf.h	71;"	d
 assert_param	cmsis_boot/stm32f0xx_conf.h	75;"	d
 assobjects	Makefile	/^assobjects = $(assemblersources:.s=.o)$/;"	m
-buffrx	src/uart.c	/^unsigned char buffrx[BUFFRX_DIM];$/;"	v
-buffrx_cpy	src/uart.c	/^unsigned char buffrx_cpy[BUFFRX_DIM];$/;"	v
 buffrx_ready	src/main.c	/^volatile unsigned char buffrx_ready = 0;$/;"	v
-bufftx	src/uart.c	/^unsigned char bufftx[BUFFTX_DIM];$/;"	v
 command	src/noritake_lcd.c	/^unsigned char command [10];$/;"	v
 end_states	src/hard.h	/^enum end_states$/;"	g
 errno	cmsis_boot/syscalls/syscalls.c	11;"	d	file:
@@ -4237,8 +4235,6 @@ objects	Makefile	/^objects = $(sources:.c=.o)$/;"	m
 pCmd	src/comm.c	/^char pCmd [20];$/;"	v
 pbuffrx	src/main.c	/^volatile unsigned char *pbuffrx;$/;"	v
 pbuffrx_cpy	src/main.c	/^volatile unsigned char *pbuffrx_cpy;$/;"	v
-pbufftx	src/uart.c	/^unsigned char * pbufftx;$/;"	v
-pbufftx2	src/uart.c	/^unsigned char * pbufftx2;$/;"	v
 prx1	src/uart.c	/^volatile unsigned char * prx1;$/;"	v
 prx2	src/uart.c	/^volatile unsigned char * prx2;$/;"	v
 ptx1	src/uart.c	/^volatile unsigned char * ptx1;$/;"	v
