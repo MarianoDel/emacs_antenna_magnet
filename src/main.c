@@ -11,12 +11,12 @@
 #include "adc.h"
 #include "stm32f0x_tim.h"
 
-//ANTENA ELEGIDA
+//ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
 //#define ANTENA0		//toroidal diametro grande
-//#define ANTENA1	//toroidal diametro mediana
+#define ANTENA1	//toroidal diametro mediana
 //#define ANTENA1B	//toroidal diametro mediana DE=110mm DI=45
 //#define ANTENA2	//cilindrica chica
-//#define ANTENA3	//cilindrica mediana
+// #define ANTENA3	//cilindrica mediana
 //#define ANTENA4	//cilindrica grande
 //#define ANTENA5	//cilindrica muy chica OJOS
 //#define ANTENA6	//cilindrica vieja de madera
@@ -35,7 +35,7 @@
 //#define ANTENAB1	//antenas Ernesto tunel 7" dia
 //#define ANTENAB2	//antenas Ernesto tunel 6" dia
 // #define ANTENAB3	//antenas Ernesto tunel 6" dia
-#define ANTENAB4	//antenas plato companiera pencil
+// #define ANTENAB4	//antenas plato companiera pencil
 
 //--- VARIABLES EXTERNAS ---//
 volatile unsigned char timer_1seg = 0;
@@ -48,13 +48,15 @@ volatile unsigned char *pbuffrx_cpy;
 const char s_ok [] = {"ok\r\n"};
 
 //--- VARIABLES GLOBALES ---//
-//antena, R [ohms], L [mHy], Imax [A], Tmax [ï¿½C] todos 000.00
+//antena, R [ohms], L [mHy], Imax [A], Tmax [ºC] todos 000.00
 #ifdef ANTENA0 //toroidal diametro grande
 const char s_antena [] = { "ant0,012.27,087.90,001.80,065.00\r\n" };
 #endif
 
 #ifdef ANTENA1 //toroidal diametro mediana
-const char s_antena [] = { "ant1,023.85,151.70,001.10,065.00\r\n" };
+// const char s_antena [] = { "ant1,023.85,151.70,001.10,065.00\r\n" };
+const char s_antena [] = { "ant1,023.85,141.60,001.30,065.00\r\n" };
+const char s_name [] = { "name:Plannar 5 inches\r\n" };
 #endif
 
 #ifdef ANTENA2 //cilindrica chica
@@ -162,417 +164,318 @@ void Delay(__IO uint32_t nTime);
 //------------------------------------------//
 int main(void)
 {
-	unsigned short adc_sample = 0;
-	char str1 [20];
-	unsigned short ts_cal1, ts_cal2;
-	int temp = 0;
-	short dx = 0;
-	unsigned char state = 0;
-	unsigned char a = 0;
-	unsigned char answer = 0;
+    unsigned short adc_sample = 0;
+    char str1 [20];
+    unsigned short ts_cal1, ts_cal2;
+    int temp = 0;
+    short dx = 0;
+    unsigned char state = 0;
+    unsigned char a = 0;
+    unsigned char answer = 0;
 
-	//!< At this stage the microcontroller clock setting is already configured,
-    //   this is done through SystemInit() function which is called from startup
-    //   file (startup_stm32f0xx.s) before to branch to application main.
-    //   To reconfigure the default setting of SystemInit() function, refer to
-    //   system_stm32f0xx.c file
+    //GPIO Configuration.
+    GPIO_Config();
 
-	//GPIO Configuration.
-	GPIO_Config();
+    //TIM Configuration.
+    Timer_1_Init();
+    //Timer_2_Init();
+    //Timer_3_Init();
+    //Timer_4_Init();
 
-	//TIM Configuration.
-	Timer_1_Init();
-	//Timer_2_Init();
-	//Timer_3_Init();
-	//Timer_4_Init();
+    //UART configuration.
+    USART1Config();
 
-	//UART configuration.
-	USART1Config();
+    //TODO:
+    //ACTIVAR SYSTICK TIMER
+    if (SysTick_Config(48000))
+    {
+        /* Capture error */
+        while (1);
+    }
 
-	//TODO:
-	//ACTIVAR SYSTICK TIMER
-	 if (SysTick_Config(48000))
-	 {
-		 /* Capture error */
-		 while (1);
-	 }
-	//SENSAR TEMPERATURA 	((OK))
-	//ENVIAR ONE WIRE		((OK))
+    //ADC configuration.
+    Usart1RxDisable();
+    if (ADC_Conf() == 0)
+        USART1Send("\r\nERROR DE CALIBRACION...");
+    else
+        USART1Send("\r\nCALIBRACION de ADC OK...");
 
-	//PRUEBA DE SYSTICK
-	 /*
-	 while(1)
-	 {
-		 if (LED_COMM)
-			 LED_COMM_OFF;
-		 else
-			 LED_COMM_ON;
+    //Activo sensor de temp
+    ADC_TempSensorCmd(ENABLE);
+    //calibracion de fabrica del sensor
+    ts_cal1 = *((uint16_t*)0x1FFFF7B8);
+    ts_cal2 = *((uint16_t*)0x1FFFF7C2);
 
-		 Delay(1);
-	 }
-	 */
-	 //FIN PRUEBA DE SYSTICK
-
-	//ADC configuration.
-	Usart1RxDisable();
-	if (ADC_Conf() == 0)
-		USART1Send("\r\nERROR DE CALIBRACION...");
-	else
-		USART1Send("\r\nCALIBRACION de ADC OK...");
-
-	//Activo sensor de temp
-	ADC_TempSensorCmd(ENABLE);
-	//calibracion de fabrica del sensor
-	ts_cal1 = *((uint16_t*)0x1FFFF7B8);
-	ts_cal2 = *((uint16_t*)0x1FFFF7C2);
-
-	USART1Send("\r\nts_cal1: ");
-	memset(str1, 0, sizeof(str1));
+    USART1Send("\r\nts_cal1: ");
+    memset(str1, 0, sizeof(str1));
     sprintf(str1, "%d", ts_cal1);
     USART1Send(str1);
     USART1Send("\r\nts_cal2: ");
-	memset(str1, 0, sizeof(str1));
+    memset(str1, 0, sizeof(str1));
     sprintf(str1, "%d", ts_cal2);
     USART1Send(str1);
     dx = ts_cal1 - ts_cal2;
     Wait_ms(100);
-	 Usart1RxEnable();
-	 Wait_ms(1900);
+    Usart1RxEnable();
+    Wait_ms(1900);
 
-	//  while (1)
-	//  {
-	// 		 if (LED_COMM)
-	// 			LED_COMM_OFF;
-	// 		else
-	// 			LED_COMM_ON;
-	 //
-	// 			Wait_ms(300);
-	 //
-	//  }
-
-
-    //--- PROGRAMA PRUEBA PUERTO SERIE Y TEMP ---//
-    /*
+    //--- Main loop ---//
     while(1)
     {
-		if (!timer_1seg)
-		{
-			timer_1seg = 5;
-			USARTx_Send("\r\nLa temp: ");
-			adc_sample = ReadADC1(16);
-			memset(str1, 0, sizeof(str1));
+        //PROGRAMA DE PRODUCCION
+        switch (state)
+        {
+        case STAND_BY:
+            //envio la info de la antena cada 1 seg hasta que me contesten
+            LED_COMM_OFF;
+            if (!timer_standby)
+            {
+                LED_COMM_ON;
+                state = TX_SERIE_NC;
+                Usart1RxDisable();
+                USART1Send((char *)s_antena);
+            }
 
-			temp = adc_sample * (-80);
-			temp = temp / dx;
-			temp = temp + 367;
+            if (buffrx_ready)
+            {
+                state = RX_SERIE;
+                buffrx_ready = 0;
+            }
+            break;
 
-			sprintf(str1, "%d", temp);
-			USARTx_Send(str1);
+        case CONNECT:
+            //cuando se agota timer_1_seg salgo a STAND_BY
+            //me fijo si debo contestar algo
+            LED_COMM_ON;
+            if (answer == KEEP_ALIVE)
+            {
+                Wait_ms(5);
+                answer = 0;
+                LED_COMM_OFF;
+                state = TX_SERIE;
+                //apago RX
+                Usart1RxDisable();
+                USART1Send((char *)s_ok);
+            }
 
-			Wait_ms(100);
-			USARTx_Send("\r\nEl adc: ");
-			memset(str1, 0, sizeof(str1));
-			sprintf(str1, "%d", adc_sample);
-			USARTx_Send(str1);
-		}
+            if (answer == GET_PARAMS)
+            {
+                Wait_ms(5);
+                answer = 0;
+                LED_COMM_OFF;
+                state = TX_SERIE;
+                //apago RX
+                Usart1RxDisable();
+                USART1Send((char *)s_antena);
+            }
 
-		if (TXD_IN)
-			TX_SERIE_OFF;
-		else
-			TX_SERIE_ON;
-    }
-    */
-    //--- FIN PROGRAMA PRUEBA PUERTO SERIE Y TEMP ---//
+            if (answer == GET_NAME)
+            {
+                Wait_ms(5);
+                answer = 0;
+                LED_COMM_OFF;
+                state = TX_SERIE;
+                //apago RX
+                Usart1RxDisable();
+                USART1Send((char *)s_name);
+            }
 
+            if (answer == GET_TEMP)
+            {
+                Wait_ms(5);
+                answer = 0;
+                LED_COMM_OFF;
+                state = TX_SERIE;
 
-    //--- PROGRAMA PRUEBA LED Y TIMER_STANDBY ---//
-    /*
-    while (1)
-    {
-		if (!timer_standby)
-		{
-			if (LED_COMM)
-				LED_COMM_OFF;
-			else
-				LED_COMM_ON;
-			timer_standby = 1000;
-		}
-    }
-	*/
-    //--- FIN PROGRAMA PRUEBA LED Y TIMER_STANDBY ---//
-
-    //--- PROGRAMA STRING COMUNICACION ONE-WIRE ---//
-    /*
-	while(1)
-	{
-		USARTx_receive ();
-		if (TXD_IN)
-			TX_SERIE_OFF;
-		else
-			TX_SERIE_ON;
-
-	}
-	*/
-    //--- FIN PROGRAMA STRING COMUNICACION ONE-WIRE ---//
-
-	//  while (1) {
-	//  	/* code */
-	// 	if (!timer_standby)
-	// 	{
-	// 		timer_standby = 6000;
-	 //
-	// 		USART1Send((char *)s_antena);
-	// 	}
-	 //
-	 //
-	// 	if (TXD_IN)
-	// 		TX_SERIE_OFF;
-	// 	else
-	// 		TX_SERIE_ON;
-	 //
-	//  }
-
-	//--- Main loop ---//
-	while(1)
-	{
-		//PROGRAMA DE PRODUCCION
-		switch (state)
-		{
-			case STAND_BY:
-				//envio la info de la antena cada 1 seg hasta que me contesten
-				LED_COMM_OFF;
-				if (!timer_standby)
-				{
-					LED_COMM_ON;
-					state = TX_SERIE_NC;
-					Usart1RxDisable();
-					USART1Send((char *)s_antena);
-				}
-
-				if (buffrx_ready)
-				{
-					state = RX_SERIE;
-					buffrx_ready = 0;
-				}
-				break;
-
-			case CONNECT:
-				//cuando se agota timer_1_seg salgo a STAND_BY
-				//me fijo si debo contestar algo
-				LED_COMM_ON;
-				if (answer == KEEP_ALIVE)
-				{
-					Wait_ms(5);
-					answer = 0;
-					LED_COMM_OFF;
-					state = TX_SERIE;
-					//apago RX
-					Usart1RxDisable();
-					USART1Send((char *)s_ok);
-				}
-
-				if (answer == GET_PARAMS)
-				{
-					Wait_ms(5);
-					answer = 0;
-					LED_COMM_OFF;
-					state = TX_SERIE;
-					//apago RX
-					Usart1RxDisable();
-					USART1Send((char *)s_antena);
-				}
-
-				if (answer == GET_TEMP)
-				{
-					Wait_ms(5);
-					answer = 0;
-					LED_COMM_OFF;
-					state = TX_SERIE;
-
-					//muestreo temp
-					adc_sample = ReadADC1(16);
+                //muestreo temp
+                adc_sample = ReadADC1(16);
 //				    temp = adc_sample * (-80);
 //				    temp = temp / dx;
 //				    temp = temp + 367;
 
-					temp = GetTemp(adc_sample);
-					//ajuste posterior
-					temp = temp - 30;
+                temp = GetTemp(adc_sample);
+                //ajuste posterior
+                temp = temp - 30;
 
-				    memset(str1, 0, sizeof(str1));
-				    sprintf(str1, "temp,%03d.00\r\n", temp);
-					 //apago RX
-					 Usart1RxDisable();
-					 USART1Send(str1);
-				}
+                memset(str1, 0, sizeof(str1));
+                sprintf(str1, "temp,%03d.00\r\n", temp);
+                //apago RX
+                Usart1RxDisable();
+                USART1Send(str1);
+            }
 
-				if (buffrx_ready)
-				{
-					state = RX_SERIE;
-					buffrx_ready = 0;
-				}
+            if (buffrx_ready)
+            {
+                state = RX_SERIE;
+                buffrx_ready = 0;
+            }
 
-				if (!timer_1seg)	//mas de 10 segs sin comunicacion
-				{
-					state = STAND_BY;
-				}
-				break;
-
-#ifdef VER_1_1
-			case TX_LCD:
-				//espero terminar de transmitir
-				if (!(USART1->CR1 & 0x80))
-				{
-					state = TX_LCD2;
-					timer_standby = 2;
-				}
-
-				if (TXD_IN)
-					TX_LCD_OFF;
-				else
-					TX_LCD_ON;
-
-				break;
-
-			case TX_LCD2:
-				//espero terminar de transmitir
-				if (!timer_standby)
-				{
-					state = STAND_BY;
-					TX_LCD_OFF;			//dejo la linea en idle
-				}
-
-				if (TXD_IN)
-					TX_LCD_OFF;
-				else
-					TX_LCD_ON;
-
-				break;
-#endif
-			case TX_SERIE:
-				//espero terminar de transmitir
-				if (!(USART1->CR1 & 0x80))
-				{
-					state = TX_SERIE2;
-					timer_standby = 2;
-				}
-#ifdef VER_1_1
-				if (TXD_IN)
-					TX_SERIE_OFF;
-				else
-					TX_SERIE_ON;
-#endif
-				break;
-
-			case TX_SERIE2:
-#ifdef VER_1_1
-				//espero terminar de transmitir
-				if (TXD_IN)
-					TX_SERIE_OFF;
-				else
-					TX_SERIE_ON;
-#endif
-				if (!timer_standby)
-				{
-					state = CONNECT;
-#ifdef VER_1_1
-					TX_SERIE_OFF;			//dejo la linea en idle
-#endif
-					LED_COMM_ON;
-					Usart1RxEnable();
-				}
-				break;
-
-			case TX_SERIE_NC:
-				//espero terminar de transmitir
-				if (!(USART1->CR1 & 0x80))
-				{
-					state = TX_SERIE2_NC;
-					timer_standby = 2;
-				}
+            if (!timer_1seg)	//mas de 10 segs sin comunicacion
+            {
+                state = STAND_BY;
+            }
+            break;
 
 #ifdef VER_1_1
-				if (TXD_IN)
-					TX_SERIE_OFF;
-				else
-					TX_SERIE_ON;
-#endif
-				break;
+        case TX_LCD:
+            //espero terminar de transmitir
+            if (!(USART1->CR1 & 0x80))
+            {
+                state = TX_LCD2;
+                timer_standby = 2;
+            }
 
-			case TX_SERIE2_NC:
+            if (TXD_IN)
+                TX_LCD_OFF;
+            else
+                TX_LCD_ON;
+
+            break;
+
+        case TX_LCD2:
+            //espero terminar de transmitir
+            if (!timer_standby)
+            {
+                state = STAND_BY;
+                TX_LCD_OFF;			//dejo la linea en idle
+            }
+
+            if (TXD_IN)
+                TX_LCD_OFF;
+            else
+                TX_LCD_ON;
+
+            break;
+#endif
+        case TX_SERIE:
+            //espero terminar de transmitir
+            if (!(USART1->CR1 & 0x80))
+            {
+                state = TX_SERIE2;
+                timer_standby = 2;
+            }
 #ifdef VER_1_1
-				//espero terminar de transmitir
-				if (TXD_IN)
-					TX_SERIE_OFF;
-				else
-					TX_SERIE_ON;
+            if (TXD_IN)
+                TX_SERIE_OFF;
+            else
+                TX_SERIE_ON;
 #endif
+            break;
 
-				if (!timer_standby)
-				{
-					state = STAND_BY;
+        case TX_SERIE2:
 #ifdef VER_1_1
-					TX_SERIE_OFF;			//dejo la linea en idle
+            //espero terminar de transmitir
+            if (TXD_IN)
+                TX_SERIE_OFF;
+            else
+                TX_SERIE_ON;
 #endif
-					timer_standby = 1000;
-					LED_COMM_OFF;
-					Usart1RxEnable();
-				}
-				break;
+            if (!timer_standby)
+            {
+                state = CONNECT;
+#ifdef VER_1_1
+                TX_SERIE_OFF;			//dejo la linea en idle
+#endif
+                LED_COMM_ON;
+                Usart1RxEnable();
+            }
+            break;
 
-			case RX_SERIE:
-				//reviso que me llego, igual paso al estado conectado
-				//si entiendo el mensaje
-				answer = 0;
-				a = InterpretarMsg ((char *)pbuffrx_cpy);
-				//a = InterpretarMsg ((char *)pbuffrx);
+        case TX_SERIE_NC:
+            //espero terminar de transmitir
+            if (!(USART1->CR1 & 0x80))
+            {
+                state = TX_SERIE2_NC;
+                timer_standby = 2;
+            }
 
-				switch (a)
-				{
-					case GET_PARAMS:
-						answer = GET_PARAMS;
-						timer_1seg = 10;
-						break;
+#ifdef VER_1_1
+            if (TXD_IN)
+                TX_SERIE_OFF;
+            else
+                TX_SERIE_ON;
+#endif
+            break;
 
-					case GET_TEMP:
-						answer = GET_TEMP;
-						timer_1seg = 10;
-						break;
+        case TX_SERIE2_NC:
+#ifdef VER_1_1
+            //espero terminar de transmitir
+            if (TXD_IN)
+                TX_SERIE_OFF;
+            else
+                TX_SERIE_ON;
+#endif
 
-					case SET_DISPLAY:
-						break;
+            if (!timer_standby)
+            {
+                state = STAND_BY;
+#ifdef VER_1_1
+                TX_SERIE_OFF;			//dejo la linea en idle
+#endif
+                timer_standby = 1000;
+                LED_COMM_OFF;
+                Usart1RxEnable();
+            }
+            break;
 
-					case CMD_DISPLAY:
-						break;
+        case RX_SERIE:
+            //reviso que me llego, igual paso al estado conectado
+            //si entiendo el mensaje
+            answer = 0;
+            a = InterpretarMsg ((char *)pbuffrx_cpy);
+            //a = InterpretarMsg ((char *)pbuffrx);
 
-					case KEEP_ALIVE:
-						answer = KEEP_ALIVE;
-						timer_1seg = 10;
-						break;
+            switch (a)
+            {
+            case GET_PARAMS:
+                answer = GET_PARAMS;
+                timer_1seg = 10;
+                break;
 
-					case ERROR:
-					default:
-						//rx_error++;
-						//state = STAND_BY;
-						break;
-				}
-				if (timer_1seg == 0)
-					state = STAND_BY;
-				else
-					state = CONNECT;
+            case GET_TEMP:
+                answer = GET_TEMP;
+                timer_1seg = 10;
+                break;
 
-				break;
+            case GET_NAME:
+                answer = GET_NAME;
+                timer_1seg = 10;
+                break;
+                
+            case SET_DISPLAY:
+                break;
 
-			case TEMP_SENSE:
-				break;
+            case CMD_DISPLAY:
+                break;
 
-			default:
-				state = STAND_BY;
-				break;
-		}
-	}
+            case KEEP_ALIVE:
+                answer = KEEP_ALIVE;
+                timer_1seg = 10;
+                break;
 
-	return 0;
+            case ERROR:
+            default:
+                //rx_error++;
+                //state = STAND_BY;
+                break;
+            }
+            if (timer_1seg == 0)
+                state = STAND_BY;
+            else
+                state = CONNECT;
+
+            break;
+
+        case TEMP_SENSE:
+            break;
+
+        default:
+            state = STAND_BY;
+            break;
+        }
+    }
+
+    return 0;
 }
 //--- End of file ---//
 

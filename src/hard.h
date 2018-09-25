@@ -12,8 +12,8 @@
 
 //-- Defines For Configuration -------------------
 //---- Configuration for Hardware Versions -------
-#define VER_2_0		//juego de 2 placas chicas
-//#define VER_1_1		//placa rectangular larga
+// #define VER_2_0		//juego de 2 placas chicas
+#define VER_1_1		//placa rectangular larga
 
 //-- End Of Defines For Configuration ---------------
 

@@ -19,6 +19,7 @@ const char s_channel [] = {"channel"};
 const char s_set_display [] = {"set_display"};
 const char s_cmd_display [] = {"cmd_display"};
 const char s_keepalive [] = {"keepalive"};
+const char s_get_name [] = {"get_name"};
 
 
 char pCmd [20];
@@ -42,6 +43,9 @@ unsigned char InterpretarMsg (char * pStr)	//TODO copiar payload solo en las cue
 	if (strncmp(pStr, s_keepalive, sizeof(s_keepalive) - 1) == 0)
 		return KEEP_ALIVE;
 
+	if (strncmp(pStr, s_get_name, sizeof(s_get_name) - 1) == 0)
+		return GET_NAME;
+        
 //	if (strncmp(s_cmd_display, pStr + 1, sizeof(s_cmd_display) - 1) == 0)
 //	{
 //		memcpy(pc, pStr + sizeof(s_cmd_display) + 4, (a - sizeof(s_cmd_display) - 4));
