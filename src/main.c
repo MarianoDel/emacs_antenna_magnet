@@ -13,7 +13,7 @@
 
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
 //#define ANTENA0		//toroidal diametro grande
-#define ANTENA1	//toroidal diametro mediana
+// #define ANTENA1	//toroidal diametro mediana
 //#define ANTENA1B	//toroidal diametro mediana DE=110mm DI=45
 //#define ANTENA2	//cilindrica chica
 // #define ANTENA3	//cilindrica mediana
@@ -36,6 +36,7 @@
 //#define ANTENAB2	//antenas Ernesto tunel 6" dia
 // #define ANTENAB3	//antenas Ernesto tunel 6" dia
 // #define ANTENAB4	//antenas plato companiera pencil
+#define ANTENAB5	//antenas para ojos 2 bobinas en paralelo
 
 //--- VARIABLES EXTERNAS ---//
 volatile unsigned char timer_1seg = 0;
@@ -145,6 +146,11 @@ const char s_antena [] = { "anta,002.20,021.71,003.00,065.00\r\n" };
 #ifdef ANTENAB4 //antenas plana companiera de pencil 26-04-18
 // const char s_antena [] = { "anta,031.10,220.00,001.10,065.00\r\n" };
 const char s_antena [] = { "anta,031.10,150.00,001.10,065.00\r\n" };    //lo baje para que me deje salr cuadrada en 60Hz
+#endif
+
+#ifdef ANTENAB5
+const char s_antena [] = { "anta,157.00,640.00,000.25,050.00\r\n" };
+const char s_name [] = { "name:GT-Googles 1\r\n" };
 #endif
 
 static __IO uint32_t TimingDelay;
