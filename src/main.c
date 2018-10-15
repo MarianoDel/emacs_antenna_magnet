@@ -13,7 +13,7 @@
 
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
 //#define ANTENA0		//toroidal diametro grande
-// #define ANTENA1	//toroidal diametro mediana
+#define ANTENA1	//toroidal diametro mediana
 //#define ANTENA1B	//toroidal diametro mediana DE=110mm DI=45
 //#define ANTENA2	//cilindrica chica
 // #define ANTENA3	//cilindrica mediana
@@ -36,7 +36,7 @@
 //#define ANTENAB2	//antenas Ernesto tunel 6" dia
 // #define ANTENAB3	//antenas Ernesto tunel 6" dia
 // #define ANTENAB4	//antenas plato companiera pencil
-#define ANTENAB5	//antenas para ojos 2 bobinas en paralelo
+// #define ANTENAB5	//antenas para ojos 2 bobinas en paralelo
 
 //--- VARIABLES EXTERNAS ---//
 volatile unsigned char timer_1seg = 0;
@@ -149,7 +149,7 @@ const char s_antena [] = { "anta,031.10,150.00,001.10,065.00\r\n" };    //lo baj
 #endif
 
 #ifdef ANTENAB5
-const char s_antena [] = { "anta,157.00,640.00,000.25,050.00\r\n" };
+const char s_antena [] = { "anta,147.00,180.00,000.32,050.00\r\n" };
 const char s_name [] = { "name:GT-Googles 1\r\n" };
 #endif
 
