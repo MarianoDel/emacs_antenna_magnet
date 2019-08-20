@@ -11,12 +11,14 @@
 #include "adc.h"
 #include "stm32f0x_tim.h"
 
+#include "dsp.h"
+
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
 //#define ANTENA0		//toroidal diametro grande
-#define ANTENA1	//toroidal diametro mediana
-//#define ANTENA1B	//toroidal diametro mediana DE=110mm DI=45
+// #define ANTENA1	//toroidal diametro mediana
+// #define ANTENA1B	//toroidal diametro mediana DE=110mm DI=45
 //#define ANTENA2	//cilindrica chica
-// #define ANTENA3	//cilindrica mediana
+#define ANTENA3	//cilindrica mediana
 //#define ANTENA4	//cilindrica grande
 //#define ANTENA5	//cilindrica muy chica OJOS
 //#define ANTENA6	//cilindrica vieja de madera
@@ -60,13 +62,19 @@ const char s_antena [] = { "ant1,023.85,141.60,001.30,065.00\r\n" };
 const char s_name [] = { "name:Plannar 5 inches\r\n" };
 #endif
 
+#ifdef ANTENA1B //toroidal diametro mediana
+// const char s_antena [] = { "ant1,023.85,151.70,001.10,065.00\r\n" };
+const char s_antena [] = { "ant1,017.00,120.00,001.30,065.00\r\n" };
+const char s_name [] = { "name:Plannar 5 inches\r\n" };
+#endif
+
 #ifdef ANTENA2 //cilindrica chica
 const char s_antena [] = { "ant2,005.70,011.10,002.80,065.00\r\n" };
 #endif
 
 #ifdef ANTENA3 //cilindrica mediana
-//const char s_antena [] = { "ant3,002.73,019.00,004.50,065.00\r\n" };
 const char s_antena [] = { "ant3,003.50,019.00,003.50,065.00\r\n" };
+const char s_name [] = { "name:Cylinder 6 inches\r\n" };
 #endif
 
 #ifdef ANTENA4 //cilindrica grande
@@ -149,7 +157,7 @@ const char s_antena [] = { "anta,031.10,150.00,001.10,065.00\r\n" };    //lo baj
 #endif
 
 #ifdef ANTENAB5
-const char s_antena [] = { "anta,147.00,180.00,000.32,050.00\r\n" };
+const char s_antena [] = { "anta,147.00,180.00,000.32,055.00\r\n" };
 const char s_name [] = { "name:GT-Googles 1\r\n" };
 #endif
 
@@ -160,7 +168,7 @@ unsigned short ADC_Conf (void);
 unsigned short ReadADC1 (unsigned char);
 int GetTemp (unsigned short);
 void Delay(__IO uint32_t nTime);
-
+void SetFirstTemp (void);
 
 
 //-------------------------------------------//
@@ -212,6 +220,8 @@ int main(void)
     ts_cal1 = *((uint16_t*)0x1FFFF7B8);
     ts_cal2 = *((uint16_t*)0x1FFFF7C2);
 
+    MA8Circular_Start();
+    
     USART1Send("\r\nts_cal1: ");
     memset(str1, 0, sizeof(str1));
     sprintf(str1, "%d", ts_cal1);
@@ -221,6 +231,7 @@ int main(void)
     sprintf(str1, "%d", ts_cal2);
     USART1Send(str1);
     dx = ts_cal1 - ts_cal2;
+    SetFirstTemp();
     Wait_ms(100);
     Usart1RxEnable();
     Wait_ms(1900);
@@ -289,9 +300,8 @@ int main(void)
             if (answer == GET_TEMP)
             {
                 Wait_ms(5);
-                answer = 0;
                 LED_COMM_OFF;
-                state = TX_SERIE;
+
 
                 //muestreo temp
                 adc_sample = ReadADC1(16);
@@ -299,18 +309,27 @@ int main(void)
 //				    temp = temp / dx;
 //				    temp = temp + 367;
 
+
+                adc_sample = MA8Circular(adc_sample);
                 temp = GetTemp(adc_sample);
                 //ajuste posterior
                 temp = temp - 30;
 
-                memset(str1, 0, sizeof(str1));
-                sprintf(str1, "temp,%03d.00\r\n", temp);
-                //apago RX
-                Usart1RxDisable();
-                USART1Send(str1);
+                //reviso errores de conversion
+                if ((temp >= 0) && (temp <= 85))
+                {
+                    memset(str1, 0, sizeof(str1));
+                    sprintf(str1, "temp,%03d.00\r\n", temp);
+                    //apago RX
+                    Usart1RxDisable();
+                    USART1Send(str1);
+
+                    answer = 0;
+                    state = TX_SERIE;
+                }
             }
 
-            if (buffrx_ready)
+            if ((buffrx_ready) && (state == CONNECT))
             {
                 state = RX_SERIE;
                 buffrx_ready = 0;
@@ -571,3 +590,17 @@ void TimingDelay_Decrement(void)
     TimingDelay--;
   }
 }
+
+void SetFirstTemp (void)
+{
+    unsigned char i;
+    unsigned short sample;
+    //muestreo temp
+    sample = ReadADC1(16);
+
+    for (i = 0; i < 8; i++)
+        MA8Circular(sample);
+    
+}
+
+    
