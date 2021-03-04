@@ -1,0 +1,35 @@
+* Funciones de los programas al dia de HOY
+* Hardware
+** Ver 2.0
+   - se forma de dos placas una de proteccion otra de comunicacion
+
+** Ver 1.1
+   - placa rectangular larga que incluye protecciones y comunicacion
+   - tiene un puerto para LCD Noritake que nunca se utilizo
+
+
+* Migrar Programa atom -> emacs
+** TODO Quitar LibST
+   - en main.c tengo los temas de la temp linea 554, verificar que quede bien armado el modulo nuevo
+   - en main.c llamo a Timer_1_Init que en realidad es el timer3 del micro
+
+** DONE Modulo tim 
+   CLOSED: [2021-03-04 Thu 12:51]
+     
+** TODO Modulo adc
+** TODO Modulo usart
+** TODO Modulo dsp
+** Agrego nuevo modulo de Temp Sensor
+
+
+** TODO Nuevas Headers Titles
+** TODO Makefile moderno con GTAGS
+** TODO Armar nuevos modelos de archivos en modulos
+   - .h .c con nuevo modelo
+** TODO Upgrade del repositorio remoto GitHub
+   - pasar a emacs...
+
+
+
+
+

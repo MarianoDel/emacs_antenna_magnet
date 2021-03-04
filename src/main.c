@@ -1,25 +1,38 @@
+//-----------------------------------------------------
+// #### PROJECT: Magnet Antenna  F030 - Custom Board ####
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ## @CPU:    STM32F030
+// ##
+// #### MAIN.C ########################################
+//-----------------------------------------------------
+
+// Includes --------------------------------------------------------------------
 #include "stm32f0xx.h"
 #include "hard.h"
 #include "gpio.h"
 #include "noritake_lcd.h"
 #include "comm.h"
 #include "uart.h"
-//#include "main.h"
-#include "stm32f0xx_adc.h"
-#include "stdio.h"
-#include "string.h"
+#include "tim.h"
 #include "adc.h"
-#include "stm32f0x_tim.h"
+// #include "dsp.h"
+#include "temp_sensor.h"
 
-#include "dsp.h"
+#include <string.h>
+#include <stdio.h>
+
 
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
-//#define ANTENA0		//toroidal diametro grande
+#define ANTENA0		//toroidal diametro 5" alambre 0.8mm dia
 // #define ANTENA1	//toroidal diametro mediana
 // #define ANTENA1B	//toroidal diametro mediana DE=110mm DI=45
 //#define ANTENA2	//cilindrica chica
-#define ANTENA3	//cilindrica mediana
-//#define ANTENA4	//cilindrica grande
+// #define ANTENA3	//cilindrica mediana
+// #define ANTENA4	//cilindrica grande
+// #define ANTENA4B	//cilindrica grande
 //#define ANTENA5	//cilindrica muy chica OJOS
 //#define ANTENA6	//cilindrica vieja de madera
 // #define ANTENA7 //pencil tunel
@@ -27,7 +40,7 @@
 //#define ANTENAA1	//Ernesto viejas
 //#define ANTENAA2	//Ernesto viejas
 //#define ANTENAA3	//Ernesto viejas
-//#define ANTENAA5	//Ernesto viejas
+// #define ANTENAA5	//Ernesto viejas
 //#define ANTENAA4	//Ernesto viejas
 //#define ANTENAA6 //antenas Ernesto tunel grande 350mm dia
 //#define ANTENAA7 //antenas Ernesto tunel mediano 240mm dia
@@ -40,10 +53,13 @@
 // #define ANTENAB4	//antenas plato companiera pencil
 // #define ANTENAB5	//antenas para ojos 2 bobinas en paralelo
 
-//--- VARIABLES EXTERNAS ---//
+// Externals -------------------------------------------------------------------
+// -- Externals for the timer module --------------------
 volatile unsigned char timer_1seg = 0;
 volatile unsigned short timer_standby = 0;
 volatile unsigned short timer_led_comm = 0;
+
+// -- Externals from or for Serial Port --------------------
 volatile unsigned char buffrx_ready = 0;
 volatile unsigned char *pbuffrx;
 volatile unsigned char *pbuffrx_cpy;
@@ -54,6 +70,7 @@ const char s_ok [] = {"ok\r\n"};
 //antena, R [ohms], L [mHy], Imax [A], Tmax [ºC] todos 000.00
 #ifdef ANTENA0 //toroidal diametro grande
 const char s_antena [] = { "ant0,012.27,087.90,001.80,065.00\r\n" };
+const char s_name [] = { "name:Plannar 5 inches\r\n" };
 #endif
 
 #ifdef ANTENA1 //toroidal diametro mediana
@@ -78,8 +95,13 @@ const char s_name [] = { "name:Cylinder 6 inches\r\n" };
 #endif
 
 #ifdef ANTENA4 //cilindrica grande
-//const char s_antena [] = { "ant4,003.44,023.00,004.50,065.00\r\n" };
-const char s_antena [] = { "ant4,004.00,022.00,003.50,065.00\r\n" };
+const char s_antena [] = { "ant4,004.00,022.60,003.50,065.00\r\n" };
+const char s_name [] = { "name:Cylinder 8 inches\r\n" };
+#endif
+
+#ifdef ANTENA4B //cilindrica grande
+const char s_antena [] = { "ant4,002.50,021.00,003.50,065.00\r\n" };
+const char s_name [] = { "name:Cylinder 10 inches\r\n" };
 #endif
 
 #ifdef ANTENA5 //cilindrica muy chica OJOS
@@ -163,14 +185,14 @@ const char s_name [] = { "name:GT-Googles 1\r\n" };
 
 static __IO uint32_t TimingDelay;
 
-//--- FUNCIONES DEL MODULO ---//
-unsigned short ADC_Conf (void);
-unsigned short ReadADC1 (unsigned char);
-int GetTemp (unsigned short);
-void Delay(__IO uint32_t nTime);
-void SetFirstTemp (void);
+// Module Private Functions ----------------------------------------------------
+void SysTickError (void);
+void TimingDelay_Decrement (void);
+// unsigned short ADC_Conf (void);
+// unsigned short ReadADC1 (unsigned char);
+// void Delay(__IO uint32_t nTime);
 
-
+unsigned short dummy_timer = 0;
 //-------------------------------------------//
 // @brief  Main program.
 // @param  None
@@ -178,11 +200,9 @@ void SetFirstTemp (void);
 //------------------------------------------//
 int main(void)
 {
-    unsigned short adc_sample = 0;
-    char str1 [20];
+    char str1 [40];
     unsigned short ts_cal1, ts_cal2;
     int temp = 0;
-    short dx = 0;
     unsigned char state = 0;
     unsigned char a = 0;
     unsigned char answer = 0;
@@ -190,49 +210,116 @@ int main(void)
     //GPIO Configuration.
     GPIO_Config();
 
+    //Start the SysTick Timer
+    if (SysTick_Config(48000))
+        SysTickError();
+
     //TIM Configuration.
-    Timer_1_Init();
-    //Timer_2_Init();
-    //Timer_3_Init();
-    //Timer_4_Init();
+    TIM_3_Init();
 
     //UART configuration.
     USART1Config();
 
-    //TODO:
-    //ACTIVAR SYSTICK TIMER
-    if (SysTick_Config(48000))
-    {
-        /* Capture error */
-        while (1);
-    }
+    // while (1)
+    // {
 
+    //     // if (!dummy_timer)
+    //     // {
+    //     //     dummy_timer = 1000;
+    //     //     if (LED_COMM)
+    //     //         LED_COMM_OFF;
+    //     //     else
+    //     //         LED_COMM_ON;
+    //     // }
+            
+    //         if (LED_COMM)
+    //             LED_COMM_OFF;
+    //         else
+    //             LED_COMM_ON;
+        
+    //     Wait_ms(1000);
+    //     USART1Send("Hola\n");
+    //     dummy_timer = 100;
+
+    //     while (dummy_timer)
+    //     {
+
+    //         if (TXD_IN)
+    //             TX_SERIE_OFF;
+    //         else
+    //             TX_SERIE_ON;
+
+    //     }
+    // }
+    
     //ADC configuration.
-    Usart1RxDisable();
-    if (ADC_Conf() == 0)
-        USART1Send("\r\nERROR DE CALIBRACION...");
-    else
-        USART1Send("\r\nCALIBRACION de ADC OK...");
+    AdcConfig();
 
-    //Activo sensor de temp
-    ADC_TempSensorCmd(ENABLE);
     //calibracion de fabrica del sensor
     ts_cal1 = *((uint16_t*)0x1FFFF7B8);
     ts_cal2 = *((uint16_t*)0x1FFFF7C2);
 
-    MA8Circular_Start();
-    
+    Usart1RxDisable();
     USART1Send("\r\nts_cal1: ");
+    dummy_timer = 100;
+    while (dummy_timer)
+    {
+        if (TXD_IN)
+            TX_SERIE_OFF;
+        else
+            TX_SERIE_ON;
+    }
+    
     memset(str1, 0, sizeof(str1));
     sprintf(str1, "%d", ts_cal1);
     USART1Send(str1);
+    dummy_timer = 100;
+    while (dummy_timer)
+    {
+        if (TXD_IN)
+            TX_SERIE_OFF;
+        else
+            TX_SERIE_ON;
+    }
+    
     USART1Send("\r\nts_cal2: ");
+    dummy_timer = 100;
+    while (dummy_timer)
+    {
+        if (TXD_IN)
+            TX_SERIE_OFF;
+        else
+            TX_SERIE_ON;
+    }
+    
     memset(str1, 0, sizeof(str1));
     sprintf(str1, "%d", ts_cal2);
     USART1Send(str1);
-    dx = ts_cal1 - ts_cal2;
-    SetFirstTemp();
+    dummy_timer = 100;
+    while (dummy_timer)
+    {
+        if (TXD_IN)
+            TX_SERIE_OFF;
+        else
+            TX_SERIE_ON;
+    }
+    
     Wait_ms(100);
+
+    GetTempInit();
+    sprintf(str1, "\r\ncurrent temp: %d\r\n", GetTemp());
+    USART1Send(str1);
+    dummy_timer = 100;
+    while (dummy_timer)
+    {
+        if (TXD_IN)
+            TX_SERIE_OFF;
+        else
+            TX_SERIE_ON;
+    }
+    
+    Wait_ms(100);
+        
     Usart1RxEnable();
     Wait_ms(1900);
 
@@ -302,18 +389,7 @@ int main(void)
                 Wait_ms(5);
                 LED_COMM_OFF;
 
-
-                //muestreo temp
-                adc_sample = ReadADC1(16);
-//				    temp = adc_sample * (-80);
-//				    temp = temp / dx;
-//				    temp = temp + 367;
-
-
-                adc_sample = MA8Circular(adc_sample);
-                temp = GetTemp(adc_sample);
-                //ajuste posterior
-                temp = temp - 30;
+                temp = GetTemp();
 
                 //reviso errores de conversion
                 if ((temp >= 0) && (temp <= 85))
@@ -502,105 +578,43 @@ int main(void)
 
     return 0;
 }
-//--- End of file ---//
 
-unsigned short ADC_Conf (void)
+    
+void SysTickError (void)
 {
-	unsigned short cal = 0;
-	ADC_InitTypeDef ADC_InitStructure;
+    //Capture systick error...
+    while (1)
+    {
+        if (LED_COMM)
+            LED_COMM_OFF;
+        else
+            LED_COMM_ON;
 
-	if (!RCC_ADC_CLK)
-		RCC_ADC_CLK_ON;
-
-	ADC_ClockModeConfig(ADC1, ADC_ClockMode_SynClkDiv4);
-
-	// preseteo de registros a default
-	ADC_DeInit(ADC1);
-	ADC_StructInit(&ADC_InitStructure);
-	ADC_Init(ADC1, &ADC_InitStructure);
-
-	//software by setting bit ADCAL=1.
-	//Calibration can only be initiated when the ADC is disabled (when ADEN=0).
-	//ADCAL bit stays at 1 during all the calibration sequence.
-	//It is then cleared by hardware as soon the calibration completes
-	cal = ADC_GetCalibrationFactor(ADC1);
-
-	// Enable ADC1
-	ADC_Cmd(ADC1, ENABLE);
-
-	return cal;
+        for (unsigned char i = 0; i < 255; i++)
+        {
+            asm ("nop \n\t"
+                 "nop \n\t"
+                 "nop \n\t" );
+        }
+    }
 }
 
-unsigned short ReadADC1 (unsigned char channel)
-{
-//	GPIOA_PIN4_ON;
-	// Set channel and sample time
-	//ADC_ChannelConfig(ADC1, channel, ADC_SampleTime_7_5Cycles);
-	ADC_ChannelConfig(ADC1, ADC_Channel_16, ADC_SampleTime_239_5Cycles);
 
-	// Start the conversion
-	ADC_StartOfConversion(ADC1);
-	// Wait until conversion completion
-	while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
-	// Get the conversion value
-//	GPIOA_PIN4_OFF;	//tarda 20us en convertir
-	return ADC_GetConversionValue(ADC1);
-}
-
-/* Temperature sensor calibration value address */
-#define TEMP110_CAL_ADDR ((uint16_t*) ((uint32_t) 0x1FFFF7C2))
-#define TEMP30_CAL_ADDR ((uint16_t*) ((uint32_t) 0x1FFFF7B8))
-#define VDD_CALIB ((uint16_t) (330))
-#define VDD_APPLI ((uint16_t) (300))
-
-int GetTemp (unsigned short adc_temp)
-{
-    int32_t temperature; /* will contain the temperature in degree Celsius */
-    //temperature = (((int32_t) ADC1->DR * VDD_APPLI / VDD_CALIB) - (int32_t) *TEMP30_CAL_ADDR );
-    temperature = (((int32_t) adc_temp * VDD_APPLI / VDD_CALIB) - (int32_t) *TEMP30_CAL_ADDR );
-    temperature = temperature * (int32_t)(110 - 30);
-    temperature = temperature / (int32_t)(*TEMP110_CAL_ADDR - *TEMP30_CAL_ADDR);
-    temperature = temperature + 30;
-
-    return temperature;
-
-}
-
-/**
-  * @brief  Inserts a delay time.
-  * @param  nTime: specifies the delay time length, in milliseconds.
-  * @retval None
-  */
-void Delay(__IO uint32_t nTime)
-{
-  TimingDelay = nTime;
-
-  while(TimingDelay != 0);
-}
-
-/**
-  * @brief  Decrements the TimingDelay variable.
-  * @param  None
-  * @retval None
-  */
 void TimingDelay_Decrement(void)
 {
-  if (TimingDelay != 0x00)
-  {
-    TimingDelay--;
-  }
+    if (dummy_timer)
+        dummy_timer--;
+    
+    // if (wait_ms_var)
+    //     wait_ms_var--;
+
+    // if (timer_standby)
+    //     timer_standby--;
+
+    // if (timer_led)
+    //     timer_led--;
+
 }
 
-void SetFirstTemp (void)
-{
-    unsigned char i;
-    unsigned short sample;
-    //muestreo temp
-    sample = ReadADC1(16);
 
-    for (i = 0; i < 8; i++)
-        MA8Circular(sample);
-    
-}
-
-    
+//--- end of file ---//

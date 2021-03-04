@@ -5,5 +5,10 @@
 *.o
 *.o.d
 *.lst
+GPATH
+GRTAGS
+GTAGS
+
+
 
 
