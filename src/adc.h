@@ -148,7 +148,7 @@
 
 #define CALIBRATION_TIMEOUT       ((uint32_t)0x0000F000)
 
-//--- Exported Module Functions ------------
+// Exported Module Functions ---------------------------------------------------
 void AdcConfig (void);
 unsigned short ReadADC1 (unsigned int);
 unsigned short ReadADC1_SameSampleTime (unsigned int);

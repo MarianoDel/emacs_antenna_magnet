@@ -1,37 +1,30 @@
-/**
-  ******************************************************************************
-  * @file    Template_2/stm32f0_uart.c
-  * @author  Nahuel
-  * @version V1.0
-  * @date    22-August-2014
-  * @brief   UART functions.
-  ******************************************************************************
-  * @attention
-  *
-  * Use this functions to configure serial comunication interface (UART).
-  *
-  ******************************************************************************
-  */
+//---------------------------------------------
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ## @CPU:    STM32F030
+// ##
+// #### UART.C ################################
+//---------------------------------------------
 
-/* Includes ------------------------------------------------------------------*/
+// Includes --------------------------------------------------------------------
 #include "hard.h"
 #include "stm32f0xx.h"
 #include "uart.h"
 
 #include <string.h>
 
-//#define SIZEOF_DATA	64
 
+// Usart Configs ---------------------------------------------------------------
+#define USE_USART1			
+//#define USE_USART2
 
-//--- Private typedef ---//
-//--- Private define ---//
-//--- Private macro ---//
 #define BUFFRX_DIM 64
 #define BUFFTX_DIM 64
 
 
-//--- Externals variables ---//
-
+// Externals -------------------------------------------------------------------
 #ifdef USE_USART1
 extern volatile unsigned char buffrx_ready;
 extern volatile unsigned char *pbuffrx;
@@ -47,7 +40,7 @@ extern volatile unsigned char rx2buff[];
 #endif
 
 
-//--- Private variables ---//
+// Globals ---------------------------------------------------------------------
 #ifdef USE_USART1
 volatile unsigned char * ptx1;
 volatile unsigned char * ptx1_pckt_index;
@@ -57,13 +50,12 @@ volatile unsigned char * prx1;
 unsigned char buffrx[BUFFRX_DIM];
 unsigned char buffrx_cpy[BUFFRX_DIM];
 
-
 //Transmission buffer.
 unsigned char bufftx[BUFFTX_DIM];
 unsigned char * pbufftx;
 unsigned char * pbufftx2;
-
 #endif
+
 
 #ifdef USE_USART2
 volatile unsigned char * ptx2;
@@ -71,9 +63,8 @@ volatile unsigned char * ptx2_pckt_index;
 volatile unsigned char * prx2;
 #endif
 
-//--- Private function prototypes ---//
 
-//--- Module functions ---//
+// Module Functions ------------------------------------------------------------
 #ifdef USE_USART1
 void USART1Config(void)
 {
@@ -107,6 +98,7 @@ void USART1Config(void)
 	NVIC_EnableIRQ(USART1_IRQn);
 	NVIC_SetPriority(USART1_IRQn, 5);
 }
+
 
 void USART1_IRQHandler(void)
 {
@@ -177,85 +169,7 @@ void USART1_IRQHandler(void)
 	}
 }
 
-// void USARTx_receive (void)
-// {
-//
-// 	if (buffrx_ready)
-// 	{
-//
-// 		//USARTx_Send((char *)&buffrx_cpy[0]);
-//
-// 		if (strncmp((char *)&buffrx_cpy[0], "keepalive", sizeof("keepalive") - 1) == 0)
-// 		{
-// 			Wait_ms(30);
-// 			USARTx_Send("ant4,003.44,023.00,004.50,065.00\r\n");
-// 			Wait_ms(30);
-// 		}
-//
-//
-//
-// 		buffrx_ready = 0;
-// 	}
-//
-// #ifdef USE_USARTx_TIMEOUT
-// 	if (buffrx_timeout == 1)
-// 	{
-// 		buffrx_timeout = 0;
-//
-// 		pbuffrx = buffrx;
-// 	}
-//
-// 	if (bufftx_timeout == 1)
-// 	{
-// 		bufftx_timeout = 0;
-//
-// 		pbufftx = bufftx;
-// 	}
-// #endif
-// }
 
-// void Usart1Send (char * send)
-// {
-// 	unsigned char i;
-//
-// 	i = strlen(send);
-// 	Usart1SendUnsigned((unsigned char *) send, i);
-// }
-//
-// void Usart1SendUnsigned(unsigned char * send, unsigned char size)
-// {
-// 	if ((ptx1_pckt_index + size) < &tx1buff[SIZEOF_DATA])
-// 	{
-// 		memcpy((unsigned char *)ptx1_pckt_index, send, size);
-// 		ptx1_pckt_index += size;
-// 		USART1->CR1 |= USART_CR1_TXEIE;
-// 	}
-// }
-//
-// void Usart1SendSingle(unsigned char tosend)
-// {
-// 	Usart1SendUnsigned(&tosend, 1);
-// }
-//
-// unsigned char ReadUsart1Buffer (unsigned char * bout, unsigned short max_len)
-// {
-// 	unsigned int len;
-//
-// 	len = prx1 - rx1buff;
-//
-// 	if (len < max_len)
-// 		memcpy(bout, (unsigned char *) rx1buff, len);
-// 	else
-// 	{
-// 		len = max_len;
-// 		memcpy(bout, (unsigned char *) rx1buff, len);
-// 	}
-//
-// 	//ajusto punteros de rx luego de la copia
-// 	prx1 = rx1buff;
-//
-// 	return (unsigned char) len;
-// }
 unsigned char USART1Send(char * send)
 {
 	unsigned char i;

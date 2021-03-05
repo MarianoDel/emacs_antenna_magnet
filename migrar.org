@@ -9,23 +9,23 @@
 
 
 * Migrar Programa atom -> emacs
-** TODO Quitar LibST
+** DONE Quitar LibST
+   CLOSED: [2021-03-05 Fri 09:21]
    - en main.c tengo los temas de la temp linea 554, verificar que quede bien armado el modulo nuevo
    - en main.c llamo a Timer_1_Init que en realidad es el timer3 del micro
 
 ** DONE Modulo tim 
    CLOSED: [2021-03-04 Thu 12:51]
      
-** TODO Modulo adc
-** TODO Modulo usart
-** TODO Modulo dsp
+** DONE Modulo adc
+   CLOSED: [2021-03-05 Fri 09:21]
+** DONE Modulo usart
+   CLOSED: [2021-03-05 Fri 09:40]
+** DONE Modulo dsp
+   CLOSED: [2021-03-05 Fri 09:21]
 ** Agrego nuevo modulo de Temp Sensor
 
 
-** TODO Nuevas Headers Titles
-** TODO Makefile moderno con GTAGS
-** TODO Armar nuevos modelos de archivos en modulos
-   - .h .c con nuevo modelo
 ** TODO Upgrade del repositorio remoto GitHub
    - pasar a emacs...
 

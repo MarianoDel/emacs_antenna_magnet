@@ -30,7 +30,7 @@ volatile unsigned short * p_channel;
 
 
 
-/* Module Functions -----------------------------------------------------------*/
+// Module Functions ------------------------------------------------------------
 //Single conversion mode (CONT=0)
 //In Single conversion mode, the ADC performs a single sequence of conversions,
 //converting all the channels once.

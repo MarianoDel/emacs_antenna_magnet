@@ -1,13 +1,18 @@
-/*
- * comm.h
- *
- *  Created on: Oct 29, 2013
- *      Author: Mariano
- */
+//-----------------------------------------------------
+// #### PROJECT: Magnet Antenna  F030 - Custom Board ####
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ## @CPU:    STM32F030
+// ##
+// #### COMM.H ########################################
+//-----------------------------------------------------
 
 #ifndef COMM_H_
 #define COMM_H_
 
+// Exported Types Constants and Macros -----------------------------------------
 #define GET_PARAMS	10
 #define GET_TEMP 11
 #define GET_GAUSS 12
@@ -19,9 +24,8 @@
 
 #define ERROR	50
 
-//funciones
+// Exported Module Functions ---------------------------------------------------
 unsigned char InterpretarMsg (char *);
-void AnalizarMsg (char *);
 
 
 #endif /* COMM_H_ */
