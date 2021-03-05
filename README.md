@@ -1,7 +1,7 @@
-# PLACA PARA ANTENAS EN EL EQUIPO MAGNETO
+# ANTENNA BOARD FOR MAGNET EQUIPMENT
 Micro STM32F030
-Conexiones para comunicacion Tx/Rx -- 5V -- GND
-Contesta temperatura actual y parametros de antena
+Comms conections Tx/Rx -- 5V -- GND
+Answers with antenna params and current temperature
 
 
 
