@@ -26,7 +26,8 @@
 ** Agrego nuevo modulo de Temp Sensor
 
 
-** TODO Upgrade del repositorio remoto GitHub
+** DONE Upgrade del repositorio remoto GitHub
+   CLOSED: [2021-03-05 Fri 10:01]
    - pasar a emacs...
 
 

@@ -77,9 +77,6 @@ SRC += ./src/uart.c
 SRC += ./src/dsp.c
 SRC += ./src/temp_sensor.c
 ## System Support
-#SRC += ./cmsis_boot/system_stm32f0xx.c
-#SRC += $(DISCOVERY)/stm32f0_discovery.c
-#SRC += ./src/Sim900.c
 ## Core Support
 SRC += $(CORELIBDIR)/core_cm0.c
 

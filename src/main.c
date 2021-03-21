@@ -188,9 +188,7 @@ static __IO uint32_t TimingDelay;
 // Module Private Functions ----------------------------------------------------
 void SysTickError (void);
 void TimingDelay_Decrement (void);
-// unsigned short ADC_Conf (void);
-// unsigned short ReadADC1 (unsigned char);
-// void Delay(__IO uint32_t nTime);
+
 
 unsigned short dummy_timer = 0;
 //-------------------------------------------//
