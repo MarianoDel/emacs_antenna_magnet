@@ -26,13 +26,13 @@
 
 
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
-#define ANTENA0		//toroidal diametro 5" alambre 0.8mm dia
-// #define ANTENA1	//toroidal diametro mediana
+// #define ANTENA0		//toroidal diametro 5" alambre 0.8mm dia
+#define ANTENA1	//toroidal diametro mediana
 // #define ANTENA1B	//toroidal diametro mediana DE=110mm DI=45
-//#define ANTENA2	//cilindrica chica
+// #define ANTENA2	//cilindrica chica tunel de munieca
 // #define ANTENA3	//cilindrica mediana
 // #define ANTENA4	//cilindrica grande
-// #define ANTENA4B	//cilindrica grande
+// #define ANTENA4B	//cilindrica grande, fabricada 18-06-2021
 //#define ANTENA5	//cilindrica muy chica OJOS
 //#define ANTENA6	//cilindrica vieja de madera
 // #define ANTENA7 //pencil tunel
@@ -87,6 +87,7 @@ const char s_name [] = { "name:Plannar 5 inches\r\n" };
 
 #ifdef ANTENA2 //cilindrica chica
 const char s_antena [] = { "ant2,005.70,011.10,002.80,065.00\r\n" };
+const char s_name [] = { "name:Wrist Tunnel\r\n" };
 #endif
 
 #ifdef ANTENA3 //cilindrica mediana
