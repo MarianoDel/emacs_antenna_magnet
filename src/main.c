@@ -27,7 +27,7 @@
 
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
 // #define ANTENA0		//toroidal diametro 5" alambre 0.8mm dia
-#define ANTENA1	//toroidal diametro mediana
+// #define ANTENA1	//toroidal diametro mediana
 // #define ANTENA1B	//toroidal diametro mediana DE=110mm DI=45
 // #define ANTENA2	//cilindrica chica tunel de munieca
 // #define ANTENA3	//cilindrica mediana
@@ -52,6 +52,7 @@
 // #define ANTENAB3	//antenas Ernesto tunel 6" dia
 // #define ANTENAB4	//antenas plato companiera pencil
 // #define ANTENAB5	//antenas para ojos 2 bobinas en paralelo
+#define ANTENAB6	//antenas para ojos 2 bobinas en paralelo
 
 // Externals -------------------------------------------------------------------
 // -- Externals for the timer module --------------------
@@ -67,6 +68,7 @@ volatile unsigned char *pbuffrx_cpy;
 const char s_ok [] = {"ok\r\n"};
 
 //--- VARIABLES GLOBALES ---//
+// Each name has to have less than 8 chars
 //antena, R [ohms], L [mHy], Imax [A], Tmax [ºC] todos 000.00
 #ifdef ANTENA0 //toroidal diametro grande
 const char s_antena [] = { "ant0,012.27,087.90,001.80,065.00\r\n" };
@@ -102,7 +104,7 @@ const char s_name [] = { "name:Cylinder 8 inches\r\n" };
 
 #ifdef ANTENA4B //cilindrica grande
 const char s_antena [] = { "ant4,002.50,021.00,003.50,065.00\r\n" };
-const char s_name [] = { "name:Cylinder 10 inches\r\n" };
+const char s_name [] = { "name:Tunnel 10 inches\r\n" };
 #endif
 
 #ifdef ANTENA5 //cilindrica muy chica OJOS
@@ -181,7 +183,12 @@ const char s_antena [] = { "anta,031.10,150.00,001.10,065.00\r\n" };    //lo baj
 
 #ifdef ANTENAB5
 const char s_antena [] = { "anta,147.00,180.00,000.32,055.00\r\n" };
-const char s_name [] = { "name:GT-Googles 1\r\n" };
+const char s_name [] = { "name:GT Googles 1\r\n" };
+#endif
+
+#ifdef ANTENAB6
+const char s_antena [] = { "anta,061.00,063.00,000.64,055.00\r\n" };
+const char s_name [] = { "name:GT Googles\r\n" };
 #endif
 
 static __IO uint32_t TimingDelay;
@@ -260,6 +267,7 @@ int main(void)
 
     Usart1RxDisable();
     USART1Send("\r\nts_cal1: ");
+#ifdef VER_1_1
     dummy_timer = 100;
     while (dummy_timer)
     {
@@ -268,10 +276,12 @@ int main(void)
         else
             TX_SERIE_ON;
     }
+#endif
     
     memset(str1, 0, sizeof(str1));
     sprintf(str1, "%d", ts_cal1);
     USART1Send(str1);
+#ifdef VER_1_1
     dummy_timer = 100;
     while (dummy_timer)
     {
@@ -280,8 +290,10 @@ int main(void)
         else
             TX_SERIE_ON;
     }
+#endif
     
     USART1Send("\r\nts_cal2: ");
+#ifdef VER_1_1
     dummy_timer = 100;
     while (dummy_timer)
     {
@@ -290,10 +302,12 @@ int main(void)
         else
             TX_SERIE_ON;
     }
+#endif
     
     memset(str1, 0, sizeof(str1));
     sprintf(str1, "%d", ts_cal2);
     USART1Send(str1);
+#ifdef VER_1_1
     dummy_timer = 100;
     while (dummy_timer)
     {
@@ -302,12 +316,14 @@ int main(void)
         else
             TX_SERIE_ON;
     }
+#endif
     
     Wait_ms(100);
 
     GetTempInit();
     sprintf(str1, "\r\ncurrent temp: %d\r\n", GetTemp());
     USART1Send(str1);
+#ifdef VER_1_1
     dummy_timer = 100;
     while (dummy_timer)
     {
@@ -316,7 +332,7 @@ int main(void)
         else
             TX_SERIE_ON;
     }
-    
+#endif
     Wait_ms(100);
         
     Usart1RxEnable();
