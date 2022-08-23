@@ -102,7 +102,6 @@ void USART1Config(void)
 
 void USART1_IRQHandler(void)
 {
-	unsigned short i;
 	unsigned char dummy;
 
 	// if (LED)

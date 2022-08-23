@@ -33,6 +33,7 @@
 // #define ANTENA3	//cilindrica mediana
 // #define ANTENA4	//cilindrica grande
 // #define ANTENA4B	//cilindrica grande, fabricada 18-06-2021
+#define ANTENA4C	//cilindrica grande, fabricada 23-08-2021
 //#define ANTENA5	//cilindrica muy chica OJOS
 //#define ANTENA6	//cilindrica vieja de madera
 // #define ANTENA7 //pencil tunel
@@ -52,7 +53,7 @@
 // #define ANTENAB3	//antenas Ernesto tunel 6" dia
 // #define ANTENAB4	//antenas plato companiera pencil
 // #define ANTENAB5	//antenas para ojos 2 bobinas en paralelo
-#define ANTENAB6	//antenas para ojos 2 bobinas en paralelo
+// #define ANTENAB6	//eyes gogles 48G, the new ones
 
 // Externals -------------------------------------------------------------------
 // -- Externals for the timer module --------------------
@@ -104,6 +105,11 @@ const char s_name [] = { "name:Cylinder 8 inches\r\n" };
 
 #ifdef ANTENA4B //cilindrica grande
 const char s_antena [] = { "ant4,002.50,021.00,003.50,065.00\r\n" };
+const char s_name [] = { "name:Tunnel 10 inches\r\n" };
+#endif
+
+#ifdef ANTENA4C //cilindrica grande 3 capas 0.9, 4 capas 0.7
+const char s_antena [] = { "ant4,006.60,056.50,003.50,065.00\r\n" };
 const char s_name [] = { "name:Tunnel 10 inches\r\n" };
 #endif
 
