@@ -28,12 +28,13 @@
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
 // #define ANTENA0		//toroidal diametro 5" alambre 0.8mm dia
 // #define ANTENA1	//toroidal diametro mediana
-// #define ANTENA1B	//toroidal diametro mediana DE=110mm DI=45
+#define ANTENA1B    // plana 125mm 23mm 1.3kg -- Plannar 5 inches
 // #define ANTENA2	//cilindrica chica tunel de munieca
 // #define ANTENA3	//cilindrica mediana
 // #define ANTENA4	//cilindrica grande
 // #define ANTENA4B	//cilindrica grande, fabricada 18-06-2021
-#define ANTENA4C	//cilindrica grande, fabricada 23-08-2021
+// #define ANTENA4C    //tunnel 10", fabricada 23-08-2021
+// #define ANTENA4D    // tunnel 10", fabricada 22-09-2022
 //#define ANTENA5	//cilindrica muy chica OJOS
 //#define ANTENA6	//cilindrica vieja de madera
 // #define ANTENA7 //pencil tunel
@@ -82,8 +83,7 @@ const char s_antena [] = { "ant1,023.85,141.60,001.30,065.00\r\n" };
 const char s_name [] = { "name:Plannar 5 inches\r\n" };
 #endif
 
-#ifdef ANTENA1B //toroidal diametro mediana
-// const char s_antena [] = { "ant1,023.85,151.70,001.10,065.00\r\n" };
+#ifdef ANTENA1B // plana 125mm 23mm 1.3kg -- Plannar 5 inches
 const char s_antena [] = { "ant1,017.00,120.00,001.30,065.00\r\n" };
 const char s_name [] = { "name:Plannar 5 inches\r\n" };
 #endif
@@ -110,6 +110,11 @@ const char s_name [] = { "name:Tunnel 10 inches\r\n" };
 
 #ifdef ANTENA4C //cilindrica grande 3 capas 0.9, 4 capas 0.7
 const char s_antena [] = { "ant4,006.60,056.50,003.50,065.00\r\n" };
+const char s_name [] = { "name:Tunnel 10 inches\r\n" };
+#endif
+
+#ifdef ANTENA4D    //tunnel 10" 6 capas 1.2mm
+const char s_antena [] = { "ant4,010.10,128.10,003.50,065.00\r\n" };
 const char s_name [] = { "name:Tunnel 10 inches\r\n" };
 #endif
 
