@@ -26,15 +26,19 @@
 
 
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
-// #define ANTENA0		//toroidal diametro 5" alambre 0.8mm dia
+// #define ANTENA0    // plana 125mm 23mm 1.3kg alambre 0.8mm dia -- Plannar 5 inches
 // #define ANTENA1	//toroidal diametro mediana
-#define ANTENA1B    // plana 125mm 23mm 1.3kg -- Plannar 5 inches
+// #define ANTENA1B    // plana 125mm 23mm 1.3kg -- Plannar 5 inches
 // #define ANTENA2	//cilindrica chica tunel de munieca
 // #define ANTENA3	//cilindrica mediana
 // #define ANTENA4	//cilindrica grande
 // #define ANTENA4B	//cilindrica grande, fabricada 18-06-2021
 // #define ANTENA4C    //tunnel 10", fabricada 23-08-2021
 // #define ANTENA4D    // tunnel 10", fabricada 22-09-2022
+// #define ANTENA4E    // tunnel 10", fabricada 10-01-2023
+// #define ANTENA4F    // tunnel 10" head, fabricada 10-01-2023
+// #define ANTENA4G    // tunnel 8", fabricada 10-01-2023
+#define ANTENA4H    // tunnel 5", fabricada 10-01-2023
 //#define ANTENA5	//cilindrica muy chica OJOS
 //#define ANTENA6	//cilindrica vieja de madera
 // #define ANTENA7 //pencil tunel
@@ -78,7 +82,6 @@ const char s_name [] = { "name:Plannar 5 inches\r\n" };
 #endif
 
 #ifdef ANTENA1 //toroidal diametro mediana
-// const char s_antena [] = { "ant1,023.85,151.70,001.10,065.00\r\n" };
 const char s_antena [] = { "ant1,023.85,141.60,001.30,065.00\r\n" };
 const char s_name [] = { "name:Plannar 5 inches\r\n" };
 #endif
@@ -95,12 +98,12 @@ const char s_name [] = { "name:Wrist Tunnel\r\n" };
 
 #ifdef ANTENA3 //cilindrica mediana
 const char s_antena [] = { "ant3,003.50,019.00,003.50,065.00\r\n" };
-const char s_name [] = { "name:Cylinder 6 inches\r\n" };
+const char s_name [] = { "name:Tunnel 6 inches\r\n" };
 #endif
 
 #ifdef ANTENA4 //cilindrica grande
 const char s_antena [] = { "ant4,004.00,022.60,003.50,065.00\r\n" };
-const char s_name [] = { "name:Cylinder 8 inches\r\n" };
+const char s_name [] = { "name:Tunnel 8 inches\r\n" };
 #endif
 
 #ifdef ANTENA4B //cilindrica grande
@@ -118,6 +121,26 @@ const char s_antena [] = { "ant4,010.10,128.10,003.50,065.00\r\n" };
 const char s_name [] = { "name:Tunnel 10 inches\r\n" };
 #endif
 
+#ifdef ANTENA4E    //tunnel 10" 4 capas 1mm, 10-01-2023
+const char s_antena [] = { "ant4,008.50,100.00,003.50,065.00\r\n" };
+const char s_name [] = { "name:Tunnel 10 inches\r\n" };
+#endif
+
+#ifdef ANTENA4F    //tunnel 10" 4 capas 1mm, 10-01-2023
+const char s_antena [] = { "ant4,008.50,100.00,003.50,065.00\r\n" };
+const char s_name [] = { "name:Head Tunnel 10\"\r\n" };
+#endif
+
+#ifdef ANTENA4G    //tunnel 8" 4 capas 0.8mm?, 10-01-2023
+const char s_antena [] = { "ant4,015.30,155.00,003.50,065.00\r\n" };
+const char s_name [] = { "name:Tunnel 8 inches\r\n" };
+#endif
+
+#ifdef ANTENA4H    //tunnel 5" 4 capas 0.8mm?, 10-01-2023
+const char s_antena [] = { "ant4,014.30,083.00,002.00,065.00\r\n" };
+const char s_name [] = { "name:Tunnel 5 inches\r\n" };
+#endif
+
 #ifdef ANTENA5 //cilindrica muy chica OJOS
 const char s_antena [] = { "ant5,052.00,130.00,000.60,065.00\r\n" };
 #endif
@@ -126,7 +149,7 @@ const char s_antena [] = { "ant5,052.00,130.00,000.60,065.00\r\n" };
 const char s_antena [] = { "ant6,010.60,078.20,002.00,065.00\r\n" };
 #endif
 
-#ifdef ANTENA7 //pencil tunel
+#ifdef ANTENA7A //pencil tunel
 const char s_antena [] = { "ant7,012.70,064.80,002.00,065.00\r\n" };
 #endif
 
