@@ -34,3 +34,18 @@
 
 
 
+
+* Nueva version v3
+** Placa unica con micro G030J6 de 8 pines
+
+** Para grabar con openocd es medio mimosa
+   - utilizar en stm32g0_flash.cfg
+     reset_config srst_nogate connect_assert_srst
+
+   - eso no graba pero deja bajo el SRST, 
+     como para despues poder grabar.
+
+   - utilizar en stm32g0_flash.cfg
+     reset_config srst_only srst_nogate
+
+   - ahora como SRST esta bajo logra entrar y grabar

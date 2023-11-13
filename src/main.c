@@ -27,6 +27,7 @@
 
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
 // #define ANTENA0    // plana 125mm 23mm 1.3kg alambre 0.8mm dia -- Plannar 5 inches
+#define ANTENA0_REUSE    // plana 125mm 23mm 1.3kg alambre 0.8mm dia -- Plannar 5 inches
 // #define ANTENA1	//toroidal diametro mediana
 // #define ANTENA1B    // plana 125mm 23mm 1.3kg -- Plannar 5 inches
 // #define ANTENA2	//cilindrica chica tunel de munieca
@@ -38,7 +39,7 @@
 // #define ANTENA4E    // tunnel 10", fabricada 10-01-2023
 // #define ANTENA4F    // tunnel 10" head, fabricada 10-01-2023
 // #define ANTENA4G    // tunnel 8", fabricada 10-01-2023
-#define ANTENA4H    // tunnel 5", fabricada 10-01-2023
+// #define ANTENA4H    // tunnel 5", fabricada 10-01-2023
 //#define ANTENA5	//cilindrica muy chica OJOS
 //#define ANTENA6	//cilindrica vieja de madera
 // #define ANTENA7 //pencil tunel
@@ -121,22 +122,22 @@ const char s_antena [] = { "ant4,010.10,128.10,003.50,065.00\r\n" };
 const char s_name [] = { "name:Tunnel 10 inches\r\n" };
 #endif
 
-#ifdef ANTENA4E    //tunnel 10" 4 capas 1mm, 10-01-2023
+#ifdef ANTENA4E    //tunnel 10" 4 capas 1.2mm 750T, 10-01-2023
 const char s_antena [] = { "ant4,008.50,100.00,003.50,065.00\r\n" };
 const char s_name [] = { "name:Tunnel 10 inches\r\n" };
 #endif
 
-#ifdef ANTENA4F    //tunnel 10" 4 capas 1mm, 10-01-2023
+#ifdef ANTENA4F    //tunnel 10" 4 capas 1.2mm 750T, 10-01-2023
 const char s_antena [] = { "ant4,008.50,100.00,003.50,065.00\r\n" };
 const char s_name [] = { "name:Head Tunnel 10\"\r\n" };
 #endif
 
-#ifdef ANTENA4G    //tunnel 8" 4 capas 0.8mm?, 10-01-2023
+#ifdef ANTENA4G    //tunnel 8" 4 capas 1mm 1000T, 10-01-2023
 const char s_antena [] = { "ant4,015.30,155.00,003.50,065.00\r\n" };
 const char s_name [] = { "name:Tunnel 8 inches\r\n" };
 #endif
 
-#ifdef ANTENA4H    //tunnel 5" 4 capas 0.8mm?, 10-01-2023
+#ifdef ANTENA4H    //tunnel 5" 4 capas 0.75mm 1000T, 10-01-2023
 const char s_antena [] = { "ant4,014.30,083.00,002.00,065.00\r\n" };
 const char s_name [] = { "name:Tunnel 5 inches\r\n" };
 #endif
@@ -225,6 +226,17 @@ const char s_antena [] = { "anta,061.00,063.00,000.64,055.00\r\n" };
 const char s_name [] = { "name:GT Googles\r\n" };
 #endif
 
+
+////////////////////////////////////////
+// Antenna Board Reuse for new Magnet //
+// REMEMBER CHANGE TVS PROTECTION!!!! //
+////////////////////////////////////////
+#ifdef ANTENA0_REUSE //toroidal diametro grande
+const char s_antena [] = { "ant0,012.27,087.90,001.80,065.50\r\n" };
+const char s_name [] = { "name:Plannar 5 inches\r\n" };
+#endif
+
+
 static __IO uint32_t TimingDelay;
 
 // Module Private Functions ----------------------------------------------------
@@ -243,6 +255,7 @@ int main(void)
     char str1 [40];
     unsigned short ts_cal1, ts_cal2;
     int temp = 0;
+    int temp_last = 0;
     unsigned char state = 0;
     unsigned char a = 0;
     unsigned char answer = 0;
@@ -443,15 +456,23 @@ int main(void)
                 //reviso errores de conversion
                 if ((temp >= 0) && (temp <= 85))
                 {
+                    // si cumple bien guardo en temp_last
+                    temp_last = temp;
                     memset(str1, 0, sizeof(str1));
                     sprintf(str1, "temp,%03d.00\r\n", temp);
-                    //apago RX
-                    Usart1RxDisable();
-                    USART1Send(str1);
-
-                    answer = 0;
-                    state = TX_SERIE;
                 }
+                else    // si medi mal mando mi ultima medicion
+                {
+                    memset(str1, 0, sizeof(str1));
+                    sprintf(str1, "temp,%03d.00\r\n", temp_last);
+                }
+
+                //apago RX
+                Usart1RxDisable();
+                USART1Send(str1);
+
+                answer = 0;
+                state = TX_SERIE;
             }
 
             if ((buffrx_ready) && (state == CONNECT))
