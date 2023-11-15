@@ -27,7 +27,8 @@
 
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
 // #define ANTENA0    // plana 125mm 23mm 1.3kg alambre 0.8mm dia -- Plannar 5 inches
-#define ANTENA0_REUSE    // plana 125mm 23mm 1.3kg alambre 0.8mm dia -- Plannar 5 inches
+// #define ANTENA0_REUSE    // plana 125mm 23mm 1.3kg alambre 0.8mm dia -- Plannar 5 inches
+// #define ANTENA1_REUSE    // plana 110mm 25mm 1.3kg? alambre 0.8mm dia -- Plannar 5 inches
 // #define ANTENA1	//toroidal diametro mediana
 // #define ANTENA1B    // plana 125mm 23mm 1.3kg -- Plannar 5 inches
 // #define ANTENA2	//cilindrica chica tunel de munieca
@@ -42,7 +43,8 @@
 // #define ANTENA4H    // tunnel 5", fabricada 10-01-2023
 //#define ANTENA5	//cilindrica muy chica OJOS
 //#define ANTENA6	//cilindrica vieja de madera
-// #define ANTENA7 //pencil tunel
+// #define ANTENA7A //pencil tunel
+// #define ANTENA7_REUSE    //pencil tunel
 //#define ANTENA8 //pencil plato doble
 //#define ANTENAA1	//Ernesto viejas
 //#define ANTENAA2	//Ernesto viejas
@@ -59,6 +61,7 @@
 // #define ANTENAB3	//antenas Ernesto tunel 6" dia
 // #define ANTENAB4	//antenas plato companiera pencil
 // #define ANTENAB5	//antenas para ojos 2 bobinas en paralelo
+#define ANTENAB5_REUSE    //antenas para ojos 2 bobinas en paralelo
 // #define ANTENAB6	//eyes gogles 48G, the new ones
 
 // Externals -------------------------------------------------------------------
@@ -235,6 +238,22 @@ const char s_name [] = { "name:GT Googles\r\n" };
 const char s_antena [] = { "ant0,012.27,087.90,001.80,065.50\r\n" };
 const char s_name [] = { "name:Plannar 5 inches\r\n" };
 #endif
+
+#ifdef ANTENA1_REUSE //toroidal diametro mediana
+const char s_antena [] = { "ant1,023.85,141.60,001.30,065.50\r\n" };
+const char s_name [] = { "name:Plannar 5 inches\r\n" };
+#endif
+
+#ifdef ANTENA7_REUSE    //pencil tunel
+const char s_antena [] = { "ant7,012.70,064.80,002.00,065.50\r\n" };
+const char s_name [] = { "name:Tunnel 4.5 inches\r\n" };
+#endif
+
+#ifdef ANTENAB5_REUSE
+const char s_antena [] = { "anta,147.00,180.00,000.32,055.50\r\n" };
+const char s_name [] = { "name:GT Googles 1\r\n" };
+#endif
+
 
 
 static __IO uint32_t TimingDelay;
