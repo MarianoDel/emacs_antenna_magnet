@@ -27,7 +27,7 @@
 
 //ANTENA ELEGIDA    VER EN HARD MODELO DE PLACA ANTENA!!!
 // #define ANTENA0    // plana 125mm 23mm 1.3kg alambre 0.8mm dia -- Plannar 5 inches
-// #define ANTENA0_REUSE    // plana 125mm 23mm 1.3kg alambre 0.8mm dia -- Plannar 5 inches
+// #define ANTENA0_REUSE    // planar 5" 125mm 23mm 1.3kg alambre 0.8mm dia -- Plannar 5 inches
 // #define ANTENA1_REUSE    // plana 110mm 25mm 1.3kg? alambre 0.8mm dia -- Plannar 5 inches
 // #define ANTENA1	//toroidal diametro mediana
 // #define ANTENA1B    // plana 125mm 23mm 1.3kg -- Plannar 5 inches
@@ -63,6 +63,7 @@
 // #define ANTENAB5	//antenas para ojos 2 bobinas en paralelo
 #define ANTENAB5_REUSE    //antenas para ojos 2 bobinas en paralelo
 // #define ANTENAB6	//eyes gogles 48G, the new ones
+// #define ANTENNA8_REUSE    //double plate 5" and 8" 12.8ohms 96mH; 22.4ohms 128mH; //eq 
 
 // Externals -------------------------------------------------------------------
 // -- Externals for the timer module --------------------
@@ -234,7 +235,7 @@ const char s_name [] = { "name:GT Googles\r\n" };
 // Antenna Board Reuse for new Magnet //
 // REMEMBER CHANGE TVS PROTECTION!!!! //
 ////////////////////////////////////////
-#ifdef ANTENA0_REUSE //toroidal diametro grande
+#ifdef ANTENA0_REUSE
 const char s_antena [] = { "ant0,012.27,087.90,001.80,065.50\r\n" };
 const char s_name [] = { "name:Plannar 5 inches\r\n" };
 #endif
@@ -250,8 +251,13 @@ const char s_name [] = { "name:Tunnel 4.5 inches\r\n" };
 #endif
 
 #ifdef ANTENAB5_REUSE
-const char s_antena [] = { "anta,147.00,180.00,000.32,055.50\r\n" };
+const char s_antena [] = { "anta,147.00,180.00,000.32,065.50\r\n" };
 const char s_name [] = { "name:GT Googles 1\r\n" };
+#endif
+
+#ifdef ANTENNA8_REUSE
+const char s_antena [] = { "ant8,008.30,055.00,003.00,060.50\r\n" };
+const char s_name [] = { "name:GT PSA 2\r\n" };
 #endif
 
 
@@ -291,38 +297,6 @@ int main(void)
 
     //UART configuration.
     USART1Config();
-
-    // while (1)
-    // {
-
-    //     // if (!dummy_timer)
-    //     // {
-    //     //     dummy_timer = 1000;
-    //     //     if (LED_COMM)
-    //     //         LED_COMM_OFF;
-    //     //     else
-    //     //         LED_COMM_ON;
-    //     // }
-            
-    //         if (LED_COMM)
-    //             LED_COMM_OFF;
-    //         else
-    //             LED_COMM_ON;
-        
-    //     Wait_ms(1000);
-    //     USART1Send("Hola\n");
-    //     dummy_timer = 100;
-
-    //     while (dummy_timer)
-    //     {
-
-    //         if (TXD_IN)
-    //             TX_SERIE_OFF;
-    //         else
-    //             TX_SERIE_ON;
-
-    //     }
-    // }
     
     //ADC configuration.
     AdcConfig();
@@ -332,6 +306,22 @@ int main(void)
     ts_cal2 = *((uint16_t*)0x1FFFF7C2);
 
     Usart1RxDisable();
+
+    sprintf(str1, "Hard: %s Soft: %s\r\n",
+            HARD_VER,
+            SOFT_VER);
+    USART1Send(str1);
+#ifdef VER_1_1
+    dummy_timer = 100;
+    while (dummy_timer)
+    {
+        if (TXD_IN)
+            TX_SERIE_OFF;
+        else
+            TX_SERIE_ON;
+    }
+#endif
+    
     USART1Send("\r\nts_cal1: ");
 #ifdef VER_1_1
     dummy_timer = 100;

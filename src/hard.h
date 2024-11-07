@@ -16,8 +16,23 @@
 
 //-- Defines For Configuration -------------------
 //---- Configuration for Hardware Versions -------
-#define VER_2_0		//juego de 2 placas chicas
-// #define VER_1_1		//placa rectangular larga
+#define VER_2_0    // two small boards
+// #define VER_1_1    // one rectangular long board
+
+#define SOFT_4_0    // send hard & soft on init
+
+#ifdef VER_2_0
+#define HARD_VER    "2.0"
+#pragma message "Hardware version 2.0 -- 2 boards set"
+#endif
+#ifdef VER_1_1
+#define HARD_VER    "1.1"
+#pragma message "Hardware version 1.1 -- rectangular long board"
+#endif
+
+#ifdef SOFT_4_0
+#define SOFT_VER    "4.0"
+#endif
 
 
 //-- End Of Defines For Configuration ---------------
